@@ -1,4 +1,3 @@
-
 import sys
 import random
 import numpy as np
@@ -19,6 +18,7 @@ def add_ball(space):
     space.add(body, shape)
     return shape
 
+
 def add_arm(space, config={}):
 
     default_config = {
@@ -35,7 +35,7 @@ def add_arm(space, config={}):
     }
 
     # Like dict.update() if it had an overwrite=False option
-    config.update({k:v for k, v in default_config.items() if k not in list(config.keys())})
+    config.update({k: v for k, v in default_config.items() if k not in list(config.keys())})
 
     # Upper Arm
     upper_arm_length = 200
@@ -43,21 +43,21 @@ def add_arm(space, config={}):
     upper_arm_body.position = config["arm_center"]
     upper_arm_body.angle = np.deg2rad(-45)
     upper_arm_line = pymunk.Segment(upper_arm_body, (0, 0), (-upper_arm_length, 0), 5)
-    upper_arm_line.sensor = True # Disable collision
+    upper_arm_line.sensor = True  # Disable collision
 
     space.add(upper_arm_body)
     space.add(upper_arm_line)
 
     # Lower Arm
-    lower_arm_body = pymunk.Body(0, 0) # Pymunk will calculate moment based on mass of attached shape
+    lower_arm_body = pymunk.Body(0, 0)  # Pymunk will calculate moment based on mass of attached shape
     lower_arm_body.position = config["arm_center"]
     lower_arm_body.angle = np.deg2rad(config["lower_arm_starting_angle"])
     elbow_extension_length = 20
     lower_arm_start = (-elbow_extension_length, 0)
     lower_arm_line = pymunk.Segment(
         lower_arm_body,
-        lower_arm_start, 
-        (config["lower_arm_length"], 0), 
+        lower_arm_start,
+        (config["lower_arm_length"], 0),
         5
     )
     lower_arm_line.mass = config["lower_arm_mass"]
@@ -74,10 +74,10 @@ def add_arm(space, config={}):
 
     # Spring (Brachialis Muscle)
     brach_spring = pymunk.constraint.DampedSpring(
-        upper_arm_body, 
-        lower_arm_body, 
-        (-(upper_arm_length * (1 / 2)), 0), # Connect half way up the upper arm
-        (config["lower_arm_length"] / 5, 0), # Connect near the bottom of the lower arm
+        upper_arm_body,
+        lower_arm_body,
+        (-(upper_arm_length * (1 / 2)), 0),  # Connect half way up the upper arm
+        (config["lower_arm_length"] / 5, 0),  # Connect near the bottom of the lower arm
         config["brach_rest_length"],
         config["brach_stiffness"],
         config["brach_damping"]
@@ -86,9 +86,9 @@ def add_arm(space, config={}):
 
     # Spring (Tricep Muscle)
     tricep_spring = pymunk.constraint.DampedSpring(
-        upper_arm_body, 
-        lower_arm_body, 
-        (-(upper_arm_length * (3 / 4)), 0), 
+        upper_arm_body,
+        lower_arm_body,
+        (-(upper_arm_length * (3 / 4)), 0),
         lower_arm_start,
         config["tricep_rest_length"],
         config["tricep_stiffness"],
@@ -107,6 +107,7 @@ def add_arm(space, config={}):
 
     return brach_spring, tricep_spring
 
+
 def main():
     pygame.init()
     screen_width = screen_height = 600
@@ -123,16 +124,15 @@ def main():
     }
     brach, tricep = add_arm(space, config)
 
-
     ####################### Render Loop #####################
     debug = True
     ball_rain = False
     balls = []
     draw_options = pymunk.pygame_util.DrawOptions(screen)
-    draw_options.flags = 1 # Disable constraint drawing
+    draw_options.flags = 1  # Disable constraint drawing
     if debug:
-        draw_options.flags = 3 # Enable constraint drawing
-    
+        draw_options.flags = 3  # Enable constraint drawing
+
     ticks_to_next_ball = 10
     frames = 0
     stiffness_delta = 50
@@ -155,10 +155,10 @@ def main():
         space.step(1/50.0)
 
         # Redraw all objects
-        screen.fill((255,255,255))
+        screen.fill((255, 255, 255))
         space.debug_draw(draw_options)
         pygame.display.flip()
-        
+
         clock.tick(50)
         frames += 1
 
@@ -167,9 +167,7 @@ def main():
 
         # Get sensory data
 
-
         # Activate motor units
-
 
         #####################################################
         # Vary world conditions
@@ -180,6 +178,7 @@ def main():
 
         if frames % 1000 == 0:
             stiffness_delta *= -1
+
 
 if __name__ == '__main__':
     main()
