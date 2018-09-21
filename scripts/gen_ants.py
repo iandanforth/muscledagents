@@ -1,295 +1,13 @@
 import os
 from mjcf import elements as e
-
-
-def get_ant(name="ant1", location=[0, 0, 0.75]):
-
-    torso = e.Body(
-        name="torso_"+name,
-        pos=location,
-    )
-
-    # Torso
-    camera = e.Camera(
-        name="track_"+name,
-        mode="trackcom",
-        pos=[0, -3, 0.3],
-        xyaxes=[1, 0, 0, 0, 0, 1]
-    )
-    torso_geom = e.Geom(
-        name="torso_geom_"+name,
-        pos=[0, 0, 0],
-        size=0.25,
-        type="sphere",
-        rgba=None
-    )
-    joint = e.Joint(
-        armature=0,
-        damping=0,
-        limited=False,
-        margin=0.01,
-        name="root_"+name,
-        pos=[0, 0, 0],
-        type="free"
-    )
-    front_right_leg, fr_tendons = get_leg(
-        "front_right_leg_"+name
-    )
-    front_left_leg, fl_tendons = get_leg(
-        "front_left_leg_"+name,
-        hip_angle=90,
-    )
-    back_left_leg, bl_tendons = get_leg(
-        "back_left_leg_"+name,
-        hip_angle=180,
-    )
-    back_right_leg, br_tendons = get_leg(
-        "back_right_leg_"+name,
-        hip_angle=270,
-    )
-    torso.add_children([
-        camera,
-        torso_geom,
-        joint,
-        front_right_leg,
-        front_left_leg,
-        back_left_leg,
-        back_right_leg
-    ])
-
-    tendons = fr_tendons + fl_tendons + bl_tendons + br_tendons
-
-    return torso, tendons
-
-
-def get_leg(
-    name,
-    hip_width=0.2,
-    hip_angle=0.0,
-    thigh_length=0.4,
-    shin_length=0.6,
-    leg_radius=0.08
-):
-
-    joint_geom_radius = leg_radius * 1.1  # For tendons
-    joint_geom_color = [0.3, 0.9, 0.3, 0.4]  # Translucent green
-
-    hip = e.Body(
-        name=name,
-        pos=[0, 0, 0],
-        euler=[0, 0, hip_angle]
-    )
-    hip_geom = e.Geom(
-        fromto=[0, 0, 0, hip_width, 0, 0],
-        name="hip_geom_"+name,
-        size=leg_radius,
-        type="capsule"
-    )
-    hip_insertion_x = hip_width * 0.1
-    left_flex_hip_insertion = e.Site(
-        name="left_flex_hip_insertion_"+name,
-        pos=[hip_insertion_x, leg_radius, 0.0],
-        size=leg_radius / 2
-    )
-    right_flex_hip_insertion = e.Site(
-        name="right_flex_hip_insertion_"+name,
-        pos=[hip_insertion_x, -leg_radius, 0.0],
-        size=leg_radius / 2
-    )
-    hip_joint_geom = e.Geom(
-        name="hip_joint_geom_"+name,
-        fromto=[hip_width, 0.0, leg_radius, hip_width, 0.0, -leg_radius],
-        type="cylinder",
-        size=joint_geom_radius,
-        rgba=joint_geom_color
-    )
-    thigh_body = e.Body(
-        name="thigh_body_"+name,
-        pos=[hip_width, 0, 0]
-    )
-    hip.add_children([
-        hip_geom,
-        left_flex_hip_insertion,
-        right_flex_hip_insertion,
-        hip_joint_geom,
-        thigh_body
-    ])
-
-    # thigh_body
-    hip_joint = e.Joint(
-        axis=[0, 0, 1],
-        name="hip_joint_"+name,
-        pos=[0.0, 0.0, 0.0],
-        range=[-30, 30],
-        type="hinge"
-    )
-    thigh_geom = e.Geom(
-        fromto=[0.0, 0.0, 0.0, thigh_length, 0.0, 0.0],
-        name="thigh_geom_"+name,
-        size=leg_radius,
-        type="capsule"
-    )
-    upper_insertion_x = thigh_length * 0.3
-    flex_thigh_insert_x = thigh_length * 0.8
-    quad_u_insertion = e.Site(
-        name="quad_u_insertion_"+name,
-        pos=[upper_insertion_x, 0.0, leg_radius],
-        size=leg_radius / 2
-    )
-    hamstring_u_insertion = e.Site(
-        name="hamstring_u_insertion_"+name,
-        pos=[upper_insertion_x, 0.0, -leg_radius],
-        size=leg_radius / 2
-    )
-    left_flex_thigh_insertion = e.Site(
-        name="left_flex_thigh_insertion_"+name,
-        pos=[flex_thigh_insert_x, leg_radius, 0.0],
-        size=leg_radius / 2
-    )
-    right_flex_thigh_insertion = e.Site(
-        name="right_flex_thigh_insertion_"+name,
-        pos=[flex_thigh_insert_x, -leg_radius, 0.0],
-        size=leg_radius / 2
-    )
-    knee_geom = e.Geom(
-        name="knee_geom_"+name,
-        fromto=[thigh_length, leg_radius, 0.0, thigh_length, -leg_radius, 0.0],
-        type="cylinder",
-        size=joint_geom_radius,
-        rgba=joint_geom_color
-    )
-    knee_top_side = e.Site(
-        name="knee_top_side_"+name,
-        pos=[thigh_length, 0.0, leg_radius * 2],
-        size=leg_radius / 2
-    )
-    shin_body = e.Body(
-        name="shin_body_"+name,
-        pos=[thigh_length, 0.0, 0]
-    )
-    thigh_body.add_children([
-        hip_joint,
-        thigh_geom,
-        left_flex_thigh_insertion,
-        right_flex_thigh_insertion,
-        quad_u_insertion,
-        hamstring_u_insertion,
-        knee_geom,
-        knee_top_side,
-        shin_body
-    ])
-
-    # shin_body
-    knee_joint = e.Joint(
-        axis=[0, 1, 0],
-        name="knee_joint_"+name,
-        pos=[0.0, 0.0, 0.0],
-        range=[30, 70],
-        type="hinge"
-    )
-    shin_geom = e.Geom(
-        fromto=[0.0, 0.0, 0.0, shin_length, 0.0, 0.0],
-        name="shin_geom_"+name,
-        size=leg_radius,
-        type="capsule"
-    )
-    lower_insertion_x = shin_length * 0.2
-    quad_l_insertion = e.Site(
-        name="quad_l_insertion_"+name,
-        pos=[lower_insertion_x, 0.0, leg_radius],
-        size=leg_radius / 2
-    )
-    hamstring_l_insertion = e.Site(
-        name="hamstring_l_insertion_"+name,
-        pos=[lower_insertion_x, 0.0, -leg_radius],
-        size=leg_radius / 2
-    )
-    shin_body.add_children([
-        knee_joint,
-        shin_geom,
-        quad_l_insertion,
-        hamstring_l_insertion
-    ])
-
-    # Tendons
-    tendons = []
-    tendon_width = 0.04
-    tendon_color = [0.95, 0.3, 0.3, 1]
-    tendon_stiffness = 1000
-    left_hip_flex = e.Spatial(
-        name="left_hip_flex_"+name,
-        width=tendon_width,
-        rgba=tendon_color,
-        stiffness=tendon_stiffness
-    )
-    lhs1 = e.spatial.Site(site=left_flex_hip_insertion.name)
-    lh_geom = e.spatial.Geom(geom=hip_joint_geom.name)
-    lhs2 = e.spatial.Site(site=left_flex_thigh_insertion.name)
-    left_hip_flex.add_children([
-        lhs1,
-        lh_geom,
-        lhs2
-    ])
-    right_hip_flex = e.Spatial(
-        name="right_hip_flex_"+name,
-        width=tendon_width,
-        rgba=tendon_color,
-        stiffness=tendon_stiffness
-    )
-    rhs1 = e.spatial.Site(site=right_flex_hip_insertion.name)
-    rh_geom = e.spatial.Geom(geom=hip_joint_geom.name)
-    rhs2 = e.spatial.Site(site=right_flex_thigh_insertion.name)
-    right_hip_flex.add_children([
-        rhs1,
-        rh_geom,
-        rhs2
-    ])
-    quad = e.Spatial(
-        name="quad_"+name,
-        width=tendon_width,
-        rgba=tendon_color,
-        stiffness=tendon_stiffness
-    )
-    qs1 = e.spatial.Site(site=quad_u_insertion.name)
-    q_geom = e.spatial.Geom(
-        geom=knee_geom.name,
-        sidesite=knee_top_side.name
-    )
-    qs2 = e.spatial.Site(site=quad_l_insertion.name)
-    quad.add_children([
-        qs1,
-        q_geom,
-        qs2
-    ])
-    hamstring = e.Spatial(
-        name="hamstring_"+name,
-        width=tendon_width,
-        rgba=tendon_color,
-        stiffness=tendon_stiffness
-    )
-    hs1 = e.spatial.Site(site=hamstring_u_insertion.name)
-    h_geom = e.spatial.Geom(geom=knee_geom.name)
-    hs2 = e.spatial.Site(site=hamstring_l_insertion.name)
-    hamstring.add_children([
-        hs1,
-        h_geom,
-        hs2
-    ])
-    tendons.extend([
-        left_hip_flex,
-        right_hip_flex,
-        quad,
-        hamstring
-    ])
-
-    return hip, tendons
+from gen_ant import get_ant
 
 
 def main():
     #########################
     # Level 1
     mujoco = e.Mujoco(
-        model="ant"
+        model="ant-army"
     )
 
     #########################
@@ -312,6 +30,7 @@ def main():
     asset = e.Asset()
     worldbody = e.Worldbody()
     tendon = e.Tendon()
+    actuator = e.Actuator()
 
     mujoco.add_children([
         compiler,
@@ -321,7 +40,8 @@ def main():
         default,
         asset,
         worldbody,
-        tendon
+        tendon,
+        actuator
     ])
 
     ######################
@@ -429,20 +149,25 @@ def main():
 
     ant_bodies = []
     ant_tendons = []
-    square_side = 1
+    ant_actuators = []
+    square_side = 3
     for i in range(square_side):
         for j in range(square_side):
             name = "ant_{}_{}".format(i, j)
             y_offset = 2.5 * i
             x_offset = 2.5 * j
-            body, tendons = get_ant(name=name, location=[x_offset, y_offset, 0.75])
+            body, tendons, actuators = get_ant(name=name, location=[x_offset, y_offset, 0.75])
             ant_bodies.append(body)
             ant_tendons.extend(tendons)
+            ant_actuators.extend(actuators)
 
     worldbody.add_children(ant_bodies)
 
     # Tendon
     tendon.add_children(ant_tendons)
+
+    # Actuator
+    actuator.add_children(ant_actuators)
 
     model_xml = mujoco.xml()
 
@@ -452,8 +177,8 @@ def main():
         "muscledagents",
         "envs",
         "mujoco",
-        "models",
-        "muscled-ant.xml"
+        "assets",
+        "muscled-ants.xml"
     )
     with open(out_path, 'w') as fh:
         fh.write(model_xml)

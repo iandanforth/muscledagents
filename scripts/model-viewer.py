@@ -7,7 +7,7 @@ model_base_path = os.path.join(
     "muscledagents",
     "envs",
     "mujoco",
-    "models",
+    "assets",
 )
 model_name = sys.argv[1]
 model_path = os.path.join(model_base_path, model_name)

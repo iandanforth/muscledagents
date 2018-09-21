@@ -15,7 +15,7 @@ model_base_path = os.path.join(
     "muscledagents",
     "envs",
     "mujoco",
-    "models",
+    "assets",
 )
 model_path = os.path.join(
     model_base_path,
@@ -43,8 +43,8 @@ for i in range(1, total_steps + 1):
         print("Rest Length", sim.model.tendon_lengthspring)
         sim.model.tendon_lengthspring[2] = sim.model.tendon_lengthspring[2] * 0.65
 
-    # import pdb
-    # pdb.set_trace()
+    import pdb
+    pdb.set_trace()
     if not initial_stiffness:
         initial_stiffness = sim.model.tendon_stiffness[0]
 
