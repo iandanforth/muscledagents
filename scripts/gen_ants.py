@@ -1,3 +1,4 @@
+import os
 from mjcf import elements as e
 
 
@@ -446,7 +447,15 @@ def main():
     model_xml = mujoco.xml()
 
     # Output
-    with open('models/ants-gen.xml', 'w') as fh:
+    out_path = os.path.join(
+        "..",
+        "muscledagents",
+        "envs",
+        "mujoco",
+        "models",
+        "muscled-ant.xml"
+    )
+    with open(out_path, 'w') as fh:
         fh.write(model_xml)
 
 

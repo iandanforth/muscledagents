@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
 from mujoco_py import load_model_from_path, MjSim, MjViewer
 import numpy as np
 import os
+from os.path import dirname
 import plotly.graph_objs as go
 from plotly.offline import plot
 
@@ -10,10 +10,18 @@ from pymuscle.hill_type import (
     contractile_element_force_velocity_curve as ce_velocity_curve,
 )
 
-
-from os.path import dirname
-path = "models/muscled-ant.xml"
-model = load_model_from_path(path)
+model_base_path = os.path.join(
+    "..",
+    "muscledagents",
+    "envs",
+    "mujoco",
+    "models",
+)
+model_path = os.path.join(
+    model_base_path,
+    "muscled-ant.xml"
+)
+model = load_model_from_path(model_path)
 sim = MjSim(model)
 viewer = MjViewer(sim)
 
