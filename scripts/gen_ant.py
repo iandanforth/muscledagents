@@ -85,30 +85,30 @@ def get_leg(
     )
     hip_geom = e.Geom(
         fromto=[0, 0, 0, hip_width, 0, 0],
-        name="hip_geom"+name,
+        name="hip_geom_"+name,
         size=leg_radius,
         type="capsule"
     )
     hip_insertion_x = hip_width * 0.1
     left_flex_hip_insertion = e.Site(
-        name="left_flex_hip_insertion"+name,
+        name="left_flex_hip_insertion_"+name,
         pos=[hip_insertion_x, leg_radius, 0.0],
         size=leg_radius / 2
     )
     right_flex_hip_insertion = e.Site(
-        name="right_flex_hip_insertion"+name,
+        name="right_flex_hip_insertion_"+name,
         pos=[hip_insertion_x, -leg_radius, 0.0],
         size=leg_radius / 2
     )
     hip_joint_geom = e.Geom(
-        name="hip_joint_geom"+name,
+        name="hip_joint_geom_"+name,
         fromto=[hip_width, 0.0, leg_radius, hip_width, 0.0, -leg_radius],
         type="cylinder",
         size=joint_geom_radius,
         rgba=joint_geom_color
     )
     thigh_body = e.Body(
-        name="thigh_body"+name,
+        name="thigh_body_"+name,
         pos=[hip_width, 0, 0]
     )
     hip.add_children([
@@ -122,53 +122,53 @@ def get_leg(
     # thigh_body
     hip_joint = e.Joint(
         axis=[0, 0, 1],
-        name="hip_joint"+name,
+        name="hip_joint_"+name,
         pos=[0.0, 0.0, 0.0],
         range=[-30, 30],
         type="hinge"
     )
     thigh_geom = e.Geom(
         fromto=[0.0, 0.0, 0.0, thigh_length, 0.0, 0.0],
-        name="thigh_geom"+name,
+        name="thigh_geom_"+name,
         size=leg_radius,
         type="capsule"
     )
     upper_insertion_x = thigh_length * 0.3
     flex_thigh_insert_x = thigh_length * 0.8
     quad_u_insertion = e.Site(
-        name="quad_u_insertion"+name,
+        name="quad_u_insertion_"+name,
         pos=[upper_insertion_x, 0.0, leg_radius],
         size=leg_radius / 2
     )
     hamstring_u_insertion = e.Site(
-        name="hamstring_u_insertion"+name,
+        name="hamstring_u_insertion_"+name,
         pos=[upper_insertion_x, 0.0, -leg_radius],
         size=leg_radius / 2
     )
     left_flex_thigh_insertion = e.Site(
-        name="left_flex_thigh_insertion"+name,
+        name="left_flex_thigh_insertion_"+name,
         pos=[flex_thigh_insert_x, leg_radius, 0.0],
         size=leg_radius / 2
     )
     right_flex_thigh_insertion = e.Site(
-        name="right_flex_thigh_insertion"+name,
+        name="right_flex_thigh_insertion_"+name,
         pos=[flex_thigh_insert_x, -leg_radius, 0.0],
         size=leg_radius / 2
     )
     knee_geom = e.Geom(
-        name="knee_geom"+name,
+        name="knee_geom_"+name,
         fromto=[thigh_length, leg_radius, 0.0, thigh_length, -leg_radius, 0.0],
         type="cylinder",
         size=joint_geom_radius,
         rgba=joint_geom_color
     )
     knee_top_side = e.Site(
-        name="knee_top_side"+name,
+        name="knee_top_side_"+name,
         pos=[thigh_length, 0.0, leg_radius * 2],
-        size=leg_radius / 2
+        size=leg_radius / 8
     )
     shin_body = e.Body(
-        name="shin_body"+name,
+        name="shin_body_"+name,
         pos=[thigh_length, 0.0, 0]
     )
     thigh_body.add_children([
@@ -186,25 +186,25 @@ def get_leg(
     # shin_body
     knee_joint = e.Joint(
         axis=[0, 1, 0],
-        name="knee_joint"+name,
+        name="knee_joint_"+name,
         pos=[0.0, 0.0, 0.0],
         range=[30, 70],
         type="hinge"
     )
     shin_geom = e.Geom(
         fromto=[0.0, 0.0, 0.0, shin_length, 0.0, 0.0],
-        name="shin_geom"+name,
+        name="shin_geom_"+name,
         size=leg_radius,
         type="capsule"
     )
     lower_insertion_x = shin_length * 0.2
     quad_l_insertion = e.Site(
-        name="quad_l_insertion"+name,
+        name="quad_l_insertion_"+name,
         pos=[lower_insertion_x, 0.0, leg_radius],
         size=leg_radius / 2
     )
     hamstring_l_insertion = e.Site(
-        name="hamstring_l_insertion"+name,
+        name="hamstring_l_insertion_"+name,
         pos=[lower_insertion_x, 0.0, -leg_radius],
         size=leg_radius / 2
     )
@@ -221,7 +221,7 @@ def get_leg(
     tendon_color = [0.95, 0.3, 0.3, 1]
     tendon_stiffness = 1000
     left_hip_flex = e.Spatial(
-        name="left_hip_flex"+name,
+        name="left_hip_flex_"+name,
         width=tendon_width,
         rgba=tendon_color,
         stiffness=tendon_stiffness
@@ -235,7 +235,7 @@ def get_leg(
         lhs2
     ])
     right_hip_flex = e.Spatial(
-        name="right_hip_flex"+name,
+        name="right_hip_flex_"+name,
         width=tendon_width,
         rgba=tendon_color,
         stiffness=tendon_stiffness
@@ -249,7 +249,7 @@ def get_leg(
         rhs2
     ])
     quad = e.Spatial(
-        name="quad"+name,
+        name="quad_"+name,
         width=tendon_width,
         rgba=tendon_color,
         stiffness=tendon_stiffness
@@ -266,7 +266,7 @@ def get_leg(
         qs2
     ])
     hamstring = e.Spatial(
-        name="hamstring"+name,
+        name="hamstring_"+name,
         width=tendon_width,
         rgba=tendon_color,
         stiffness=tendon_stiffness
@@ -289,33 +289,35 @@ def get_leg(
     # Actuators
     # TODO: Replace with Muscles once 2.0 is released
     actuators = []
+    act_gain = 200
+    act_ctrl_range = [-3.0, 0.0]
     quad_act = e.General(
-        name="quad_act"+name,
+        name="quad_act_"+name,
         tendon=quad.name,
         ctrllimited="true",
-        gainprm="50",
-        ctrlrange="0 1"
+        gainprm=act_gain,
+        ctrlrange=act_ctrl_range
     )
     hamstring_act = e.General(
-        name="hamstring_act"+name,
+        name="hamstring_act_"+name,
         tendon=hamstring.name,
         ctrllimited="true",
-        gainprm="50",
-        ctrlrange="0 1"
+        gainprm=act_gain,
+        ctrlrange=act_ctrl_range
     )
     right_hip_flex_act = e.General(
-        name="right_hip_flex_act"+name,
+        name="right_hip_flex_act_"+name,
         tendon=right_hip_flex.name,
         ctrllimited="true",
-        gainprm="50",
-        ctrlrange="0 1"
+        gainprm=act_gain,
+        ctrlrange=act_ctrl_range
     )
     left_hip_flex_act = e.General(
-        name="left_hip_flex_act"+name,
+        name="left_hip_flex_act_"+name,
         tendon=left_hip_flex.name,
         ctrllimited="true",
-        gainprm="50",
-        ctrlrange="0 1"
+        gainprm=act_gain,
+        ctrlrange=act_ctrl_range
     )
     actuators.extend([
         quad_act,

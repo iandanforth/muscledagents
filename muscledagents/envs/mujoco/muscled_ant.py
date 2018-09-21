@@ -1,7 +1,7 @@
 import numpy as np
 from gym import utils
 from . import mujoco_env
-from pymuscle import PotvinFuglevandMuscle as Muscle
+from pymuscle import StandardMuscle as Muscle
 
 
 class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
@@ -19,7 +19,7 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         self,
         muscle_count,
         apply_fatigue=True,
-        motor_unit_count=300
+        motor_unit_count=900
     ):
         """
         Create N muscles where N is the number of actuators specified in the
@@ -41,7 +41,13 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             output = muscle.step(a[i], 0.002 * self.frame_skip)
             outputs.append(output)
 
-        self.do_simulation(a, self.frame_skip)
+        # TODO: Use np arrays all the way down
+        outputs = np.array(outputs)
+        outputs /= 5305
+        outputs *= -1
+        print(outputs)
+
+        self.do_simulation(outputs, self.frame_skip)
         xposafter = self.get_body_com("torso")[0]
         forward_reward = (xposafter - xposbefore)/self.dt
         ctrl_cost = .5 * np.square(a).sum()

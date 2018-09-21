@@ -25,193 +25,193 @@
 			<geom name="torso_geom" pos="0 0 0" size="0.25" type="sphere"/>
 			<joint armature="0" damping="0" limited="false" margin="0.01" name="root" pos="0 0 0" type="free"/>
 			<body name="front_right_leg" pos="0 0 0" euler="0 0 0.0">
-				<geom fromto="0 0 0 0.2 0 0" name="hip_geomfront_right_leg" size="0.08" type="capsule"/>
-				<site name="left_flex_hip_insertionfront_right_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
-				<site name="right_flex_hip_insertionfront_right_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
-				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geomfront_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-				<body name="thigh_bodyfront_right_leg" pos="0.2 0 0">
-					<joint axis="0 0 1" name="hip_jointfront_right_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
-					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geomfront_right_leg" size="0.08" type="capsule"/>
-					<site name="left_flex_thigh_insertionfront_right_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
-					<site name="right_flex_thigh_insertionfront_right_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
-					<site name="quad_u_insertionfront_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
-					<site name="hamstring_u_insertionfront_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
-					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geomfront_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-					<site name="knee_top_sidefront_right_leg" pos="0.4 0.0 0.16" size="0.04"/>
-					<body name="shin_bodyfront_right_leg" pos="0.4 0.0 0">
-						<joint axis="0 1 0" name="knee_jointfront_right_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
-						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geomfront_right_leg" size="0.08" type="capsule"/>
-						<site name="quad_l_insertionfront_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
-						<site name="hamstring_l_insertionfront_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_front_right_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_front_right_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_front_right_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_front_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_front_right_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_front_right_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_front_right_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_front_right_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_front_right_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_front_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_front_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_front_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_front_right_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_front_right_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_front_right_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_front_right_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_front_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_front_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
 					</body>
 				</body>
 			</body>
 			<body name="front_left_leg" pos="0 0 0" euler="0 0 90">
-				<geom fromto="0 0 0 0.2 0 0" name="hip_geomfront_left_leg" size="0.08" type="capsule"/>
-				<site name="left_flex_hip_insertionfront_left_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
-				<site name="right_flex_hip_insertionfront_left_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
-				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geomfront_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-				<body name="thigh_bodyfront_left_leg" pos="0.2 0 0">
-					<joint axis="0 0 1" name="hip_jointfront_left_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
-					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geomfront_left_leg" size="0.08" type="capsule"/>
-					<site name="left_flex_thigh_insertionfront_left_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
-					<site name="right_flex_thigh_insertionfront_left_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
-					<site name="quad_u_insertionfront_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
-					<site name="hamstring_u_insertionfront_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
-					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geomfront_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-					<site name="knee_top_sidefront_left_leg" pos="0.4 0.0 0.16" size="0.04"/>
-					<body name="shin_bodyfront_left_leg" pos="0.4 0.0 0">
-						<joint axis="0 1 0" name="knee_jointfront_left_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
-						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geomfront_left_leg" size="0.08" type="capsule"/>
-						<site name="quad_l_insertionfront_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
-						<site name="hamstring_l_insertionfront_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_front_left_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_front_left_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_front_left_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_front_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_front_left_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_front_left_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_front_left_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_front_left_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_front_left_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_front_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_front_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_front_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_front_left_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_front_left_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_front_left_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_front_left_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_front_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_front_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
 					</body>
 				</body>
 			</body>
 			<body name="back_left_leg" pos="0 0 0" euler="0 0 180">
-				<geom fromto="0 0 0 0.2 0 0" name="hip_geomback_left_leg" size="0.08" type="capsule"/>
-				<site name="left_flex_hip_insertionback_left_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
-				<site name="right_flex_hip_insertionback_left_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
-				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geomback_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-				<body name="thigh_bodyback_left_leg" pos="0.2 0 0">
-					<joint axis="0 0 1" name="hip_jointback_left_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
-					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geomback_left_leg" size="0.08" type="capsule"/>
-					<site name="left_flex_thigh_insertionback_left_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
-					<site name="right_flex_thigh_insertionback_left_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
-					<site name="quad_u_insertionback_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
-					<site name="hamstring_u_insertionback_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
-					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geomback_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-					<site name="knee_top_sideback_left_leg" pos="0.4 0.0 0.16" size="0.04"/>
-					<body name="shin_bodyback_left_leg" pos="0.4 0.0 0">
-						<joint axis="0 1 0" name="knee_jointback_left_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
-						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geomback_left_leg" size="0.08" type="capsule"/>
-						<site name="quad_l_insertionback_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
-						<site name="hamstring_l_insertionback_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_back_left_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_back_left_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_back_left_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_back_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_back_left_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_back_left_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_back_left_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_back_left_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_back_left_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_back_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_back_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_back_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_back_left_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_back_left_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_back_left_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_back_left_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_back_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_back_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
 					</body>
 				</body>
 			</body>
 			<body name="back_right_leg" pos="0 0 0" euler="0 0 270">
-				<geom fromto="0 0 0 0.2 0 0" name="hip_geomback_right_leg" size="0.08" type="capsule"/>
-				<site name="left_flex_hip_insertionback_right_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
-				<site name="right_flex_hip_insertionback_right_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
-				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geomback_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-				<body name="thigh_bodyback_right_leg" pos="0.2 0 0">
-					<joint axis="0 0 1" name="hip_jointback_right_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
-					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geomback_right_leg" size="0.08" type="capsule"/>
-					<site name="left_flex_thigh_insertionback_right_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
-					<site name="right_flex_thigh_insertionback_right_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
-					<site name="quad_u_insertionback_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
-					<site name="hamstring_u_insertionback_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
-					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geomback_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
-					<site name="knee_top_sideback_right_leg" pos="0.4 0.0 0.16" size="0.04"/>
-					<body name="shin_bodyback_right_leg" pos="0.4 0.0 0">
-						<joint axis="0 1 0" name="knee_jointback_right_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
-						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geomback_right_leg" size="0.08" type="capsule"/>
-						<site name="quad_l_insertionback_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
-						<site name="hamstring_l_insertionback_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_back_right_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_back_right_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_back_right_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_back_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_back_right_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_back_right_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_back_right_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_back_right_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_back_right_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_back_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_back_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_back_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_back_right_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_back_right_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_back_right_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_back_right_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_back_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_back_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
 					</body>
 				</body>
 			</body>
 		</body>
 	</worldbody>
 	<tendon>
-		<spatial name="left_hip_flexfront_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="left_flex_hip_insertionfront_right_leg"/>
-			<geom geom="hip_joint_geomfront_right_leg"/>
-			<site site="left_flex_thigh_insertionfront_right_leg"/>
+		<spatial name="left_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_front_right_leg"/>
+			<geom geom="hip_joint_geom_front_right_leg"/>
+			<site site="left_flex_thigh_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="right_hip_flexfront_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="right_flex_hip_insertionfront_right_leg"/>
-			<geom geom="hip_joint_geomfront_right_leg"/>
-			<site site="right_flex_thigh_insertionfront_right_leg"/>
+		<spatial name="right_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_front_right_leg"/>
+			<geom geom="hip_joint_geom_front_right_leg"/>
+			<site site="right_flex_thigh_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="quadfront_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="quad_u_insertionfront_right_leg"/>
-			<geom geom="knee_geomfront_right_leg" sidesite="knee_top_sidefront_right_leg"/>
-			<site site="quad_l_insertionfront_right_leg"/>
+		<spatial name="quad_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_front_right_leg"/>
+			<geom geom="knee_geom_front_right_leg" sidesite="knee_top_side_front_right_leg"/>
+			<site site="quad_l_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="hamstringfront_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="hamstring_u_insertionfront_right_leg"/>
-			<geom geom="knee_geomfront_right_leg"/>
-			<site site="hamstring_l_insertionfront_right_leg"/>
+		<spatial name="hamstring_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_front_right_leg"/>
+			<geom geom="knee_geom_front_right_leg"/>
+			<site site="hamstring_l_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="left_hip_flexfront_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="left_flex_hip_insertionfront_left_leg"/>
-			<geom geom="hip_joint_geomfront_left_leg"/>
-			<site site="left_flex_thigh_insertionfront_left_leg"/>
+		<spatial name="left_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_front_left_leg"/>
+			<geom geom="hip_joint_geom_front_left_leg"/>
+			<site site="left_flex_thigh_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="right_hip_flexfront_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="right_flex_hip_insertionfront_left_leg"/>
-			<geom geom="hip_joint_geomfront_left_leg"/>
-			<site site="right_flex_thigh_insertionfront_left_leg"/>
+		<spatial name="right_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_front_left_leg"/>
+			<geom geom="hip_joint_geom_front_left_leg"/>
+			<site site="right_flex_thigh_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="quadfront_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="quad_u_insertionfront_left_leg"/>
-			<geom geom="knee_geomfront_left_leg" sidesite="knee_top_sidefront_left_leg"/>
-			<site site="quad_l_insertionfront_left_leg"/>
+		<spatial name="quad_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_front_left_leg"/>
+			<geom geom="knee_geom_front_left_leg" sidesite="knee_top_side_front_left_leg"/>
+			<site site="quad_l_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="hamstringfront_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="hamstring_u_insertionfront_left_leg"/>
-			<geom geom="knee_geomfront_left_leg"/>
-			<site site="hamstring_l_insertionfront_left_leg"/>
+		<spatial name="hamstring_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_front_left_leg"/>
+			<geom geom="knee_geom_front_left_leg"/>
+			<site site="hamstring_l_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="left_hip_flexback_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="left_flex_hip_insertionback_left_leg"/>
-			<geom geom="hip_joint_geomback_left_leg"/>
-			<site site="left_flex_thigh_insertionback_left_leg"/>
+		<spatial name="left_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_back_left_leg"/>
+			<geom geom="hip_joint_geom_back_left_leg"/>
+			<site site="left_flex_thigh_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="right_hip_flexback_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="right_flex_hip_insertionback_left_leg"/>
-			<geom geom="hip_joint_geomback_left_leg"/>
-			<site site="right_flex_thigh_insertionback_left_leg"/>
+		<spatial name="right_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_back_left_leg"/>
+			<geom geom="hip_joint_geom_back_left_leg"/>
+			<site site="right_flex_thigh_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="quadback_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="quad_u_insertionback_left_leg"/>
-			<geom geom="knee_geomback_left_leg" sidesite="knee_top_sideback_left_leg"/>
-			<site site="quad_l_insertionback_left_leg"/>
+		<spatial name="quad_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_back_left_leg"/>
+			<geom geom="knee_geom_back_left_leg" sidesite="knee_top_side_back_left_leg"/>
+			<site site="quad_l_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="hamstringback_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="hamstring_u_insertionback_left_leg"/>
-			<geom geom="knee_geomback_left_leg"/>
-			<site site="hamstring_l_insertionback_left_leg"/>
+		<spatial name="hamstring_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_back_left_leg"/>
+			<geom geom="knee_geom_back_left_leg"/>
+			<site site="hamstring_l_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="left_hip_flexback_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="left_flex_hip_insertionback_right_leg"/>
-			<geom geom="hip_joint_geomback_right_leg"/>
-			<site site="left_flex_thigh_insertionback_right_leg"/>
+		<spatial name="left_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_back_right_leg"/>
+			<geom geom="hip_joint_geom_back_right_leg"/>
+			<site site="left_flex_thigh_insertion_back_right_leg"/>
 		</spatial>
-		<spatial name="right_hip_flexback_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="right_flex_hip_insertionback_right_leg"/>
-			<geom geom="hip_joint_geomback_right_leg"/>
-			<site site="right_flex_thigh_insertionback_right_leg"/>
+		<spatial name="right_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_back_right_leg"/>
+			<geom geom="hip_joint_geom_back_right_leg"/>
+			<site site="right_flex_thigh_insertion_back_right_leg"/>
 		</spatial>
-		<spatial name="quadback_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="quad_u_insertionback_right_leg"/>
-			<geom geom="knee_geomback_right_leg" sidesite="knee_top_sideback_right_leg"/>
-			<site site="quad_l_insertionback_right_leg"/>
+		<spatial name="quad_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_back_right_leg"/>
+			<geom geom="knee_geom_back_right_leg" sidesite="knee_top_side_back_right_leg"/>
+			<site site="quad_l_insertion_back_right_leg"/>
 		</spatial>
-		<spatial name="hamstringback_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
-			<site site="hamstring_u_insertionback_right_leg"/>
-			<geom geom="knee_geomback_right_leg"/>
-			<site site="hamstring_l_insertionback_right_leg"/>
+		<spatial name="hamstring_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_back_right_leg"/>
+			<geom geom="knee_geom_back_right_leg"/>
+			<site site="hamstring_l_insertion_back_right_leg"/>
 		</spatial>
 	</tendon>
 	<actuator>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="quad_actfront_right_leg" tendon="quadfront_right_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="hamstring_actfront_right_leg" tendon="hamstringfront_right_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="right_hip_flex_actfront_right_leg" tendon="right_hip_flexfront_right_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="left_hip_flex_actfront_right_leg" tendon="left_hip_flexfront_right_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="quad_actfront_left_leg" tendon="quadfront_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="hamstring_actfront_left_leg" tendon="hamstringfront_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="right_hip_flex_actfront_left_leg" tendon="right_hip_flexfront_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="left_hip_flex_actfront_left_leg" tendon="left_hip_flexfront_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="quad_actback_left_leg" tendon="quadback_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="hamstring_actback_left_leg" tendon="hamstringback_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="right_hip_flex_actback_left_leg" tendon="right_hip_flexback_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="left_hip_flex_actback_left_leg" tendon="left_hip_flexback_left_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="quad_actback_right_leg" tendon="quadback_right_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="hamstring_actback_right_leg" tendon="hamstringback_right_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="right_hip_flex_actback_right_leg" tendon="right_hip_flexback_right_leg"/>
-		<general ctrllimited="true" ctrlrange="0 1" gainprm="50" name="left_hip_flex_actback_right_leg" tendon="left_hip_flexback_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_front_right_leg" tendon="quad_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_front_right_leg" tendon="hamstring_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_front_right_leg" tendon="right_hip_flex_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_front_right_leg" tendon="left_hip_flex_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_front_left_leg" tendon="quad_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_front_left_leg" tendon="hamstring_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_front_left_leg" tendon="right_hip_flex_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_front_left_leg" tendon="left_hip_flex_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_back_left_leg" tendon="quad_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_back_left_leg" tendon="hamstring_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_back_left_leg" tendon="right_hip_flex_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_back_left_leg" tendon="left_hip_flex_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_back_right_leg" tendon="quad_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_back_right_leg" tendon="hamstring_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_back_right_leg" tendon="right_hip_flex_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_back_right_leg" tendon="left_hip_flex_back_right_leg"/>
 	</actuator>
 </mujoco>

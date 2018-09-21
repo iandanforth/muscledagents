@@ -1,6 +1,7 @@
 from mujoco_py import load_model_from_path, MjSim, MjViewer
 import numpy as np
 import os
+import math
 from os.path import dirname
 import plotly.graph_objs as go
 from plotly.offline import plot
@@ -41,10 +42,14 @@ for i in range(1, total_steps + 1):
 
     if i == 1:
         print("Rest Length", sim.model.tendon_lengthspring)
-        sim.model.tendon_lengthspring[2] = sim.model.tendon_lengthspring[2] * 0.65
+        print(len(sim.data.ctrl))
+        # sim.model.tendon_lengthspring[0] = sim.model.tendon_lengthspring[0] * 0.65
 
-    import pdb
-    pdb.set_trace()
+    if i > 400:
+        sim.data.ctrl[1] = math.cos(i/100) - 1
+
+    # import pdb
+    # pdb.set_trace()
     if not initial_stiffness:
         initial_stiffness = sim.model.tendon_stiffness[0]
 
