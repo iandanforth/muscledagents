@@ -12,8 +12,9 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
         # Initialize parents
         mujoco_env.MujocoEnv.__init__(self, 'muscled-ant.xml', 4)
-
         utils.EzPickle.__init__(self)
+
+        # Override the action space
 
     def _get_muscles(
         self,
@@ -45,7 +46,6 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         outputs = np.array(outputs)
         outputs /= 5305
         outputs *= -1
-        print(outputs)
 
         self.do_simulation(outputs, self.frame_skip)
         xposafter = self.get_body_com("torso")[0]

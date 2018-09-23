@@ -72,10 +72,10 @@ def main():
 
     action = [0.0] * env.muscle_count
     for i in range(total_steps):
-        action[1] = ((math.sin(i / 50) + 1) / 2) * 60
-        action[5] = ((math.sin(i / 50) + 1) / 2) * 60
-        action[9] = ((math.sin(i / 50) + 1) / 2) * 60
-        action[13] = ((math.sin(i / 50) + 1) / 2) * 60
+        action[1] = ((math.sin(i / 25) + 1) / 2) * 60
+        action[5] = ((math.sin(i / 35) + 1) / 2) * 60
+        action[9] = ((math.sin(i / 45) + 1) / 2) * 60
+        action[13] = ((math.sin(i / 55) + 1) / 2) * 60
         env.step(action)
         env.render()
 
