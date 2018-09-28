@@ -23,7 +23,8 @@ VERSION = None
 # What packages are required for this module to be executed?
 REQUIRED = [
     "gym",
-    "pymuscle"
+    "pymuscle",
+    "mujoco-py<1.50.2,>=1.50.1"
 ]
 
 # The rest you shouldn't have to touch too much :)

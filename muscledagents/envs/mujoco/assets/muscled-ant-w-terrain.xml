@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="ant">
+	<compiler angle="degree" coordinate="local" inertiafromgeom="true"/>
+	<option integrator="RK4" timestep="0.01"/>
+	<size nconmax="4000" njmax="4000"/>
+	<custom>
+		<numeric name="init_qpos" data="0.0 0.0 0.55 1.0 0.0 0.0 0.0 0.0 1.0 0.0 -1.0 0.0 -1.0 0.0 1.0"/>
+	</custom>
+	<default>
+		<joint armature="1" damping="1" limited="true"/>
+		<geom density="5.0" friction="1 0.5 0.5" margin="0.01" rgba="0.8 0.6 0.4 1"/>
+	</default>
+	<asset>
+		<texture builtin="gradient" height="100" rgb1="1 1 1" rgb2="0 0 0" type="skybox" width="100"/>
+		<texture builtin="flat" height="1278" mark="cross" markrgb="1 1 1" name="texgeom" random="0.01" rgb1="0.8 0.6 0.4" rgb2="0.8 0.6 0.4" type="cube" width="127"/>
+		<texture builtin="checker" height="100" name="texplane" rgb1="0 0 0" rgb2="0.8 0.8 0.8" type="2d" width="100"/>
+		<material name="MatPlane" reflectance="0.5" shininess="1" specular="1" texrepeat="60 60" texture="texplane"/>
+		<material name="geom" texture="texgeom" texuniform="true"/>
+	</asset>
+	<worldbody>
+		<light cutoff="100" diffuse="1 1 1" dir="0 0 -1.3" directional="true" exponent="1" pos="0 0 1.3" specular="0.1 0.1 0.1"/>
+		<geom material="MatPlane" name="floor" pos="0 0 0" rgba="0.8 0.9 0.8 1" size="40 40 40" type="plane"/>
+		<body pos="0.1673600753981247 0.6587558156703676 0.32699120412046845">
+			<freejoint/>
+			<geom rgba="0.585678 0.846661 0.249897 0.9841260994849415" size="0.16349560206023422 0.16349560206023422 0.16349560206023422" type="box"/>
+		</body>
+		<body pos="0.7225096441100464 1.6935581568033407 0.2624790495798182">
+			<freejoint/>
+			<geom rgba="0.804182 0.882046 0.114965 0.9921901188025227" size="0.1312395247899091 0.1312395247899091 0.1312395247899091" type="box"/>
+		</body>
+		<body pos="0.16356272687333417 2.7240509210518784 0.899037421693589">
+			<freejoint/>
+			<geom rgba="0.278826 0.17549 0.483397 0.9126203222883014" size="0.4495187108467945 0.4495187108467945 0.4495187108467945" type="box"/>
+		</body>
+		<body pos="0.8148142180950579 3.516493215136385 0.675059417301208">
+			<freejoint/>
+			<geom rgba="0.162142 0.474838 0.55814 0.940617572837349" size="0.337529708650604 0.337529708650604 0.337529708650604" type="box"/>
+		</body>
+		<body pos="0.1719494706963992 4.305463299171456 0.2843324610119381">
+			<freejoint/>
+			<geom rgba="0.730889 0.871916 0.156029 0.9894584423735078" size="0.14216623050596905 0.14216623050596905 0.14216623050596905" type="box"/>
+		</body>
+		<body pos="0.4744798855492641 5.766046345081931 0.7027604083018113">
+			<freejoint/>
+			<geom rgba="0.174274 0.445044 0.557792 0.9371549489622736" size="0.35138020415090565 0.35138020415090565 0.35138020415090565" type="box"/>
+		</body>
+		<body pos="0.13937710995693553 6.037236540892212 0.5750016727838638">
+			<freejoint/>
+			<geom rgba="0.121148 0.592739 0.544641 0.9531247909020171" size="0.2875008363919319 0.2875008363919319 0.2875008363919319" type="box"/>
+		</body>
+		<body pos="0.13336794372992777 7.192025291977185 0.6473519405376021">
+			<freejoint/>
+			<geom rgba="0.149039 0.508051 0.55725 0.9440810074327998" size="0.32367597026880107 0.32367597026880107 0.32367597026880107" type="box"/>
+		</body>
+		<body pos="0.2121361134256048 8.350985571288428 0.3141532933792271">
+			<freejoint/>
+			<geom rgba="0.626579 0.854645 0.223353 0.9857308383275967" size="0.15707664668961355 0.15707664668961355 0.15707664668961355" type="box"/>
+		</body>
+		<body pos="0.5558818737323313 9.345861155327693 0.42647617624000733">
+			<freejoint/>
+			<geom rgba="0.296479 0.761561 0.424223 0.9716904779699991" size="0.21323808812000367 0.21323808812000367 0.21323808812000367" type="box"/>
+		</body>
+		<body pos="1.9441649422448144 0.8659477218262104 0.292320599208884">
+			<freejoint/>
+			<geom rgba="0.699415 0.867117 0.175971 0.9884599250988895" size="0.146160299604442 0.146160299604442 0.146160299604442" type="box"/>
+		</body>
+		<body pos="1.6716103831074087 1.2952335489203497 0.9081751321886002">
+			<freejoint/>
+			<geom rgba="0.280868 0.160771 0.472899 0.911478108476425" size="0.4540875660943001 0.4540875660943001 0.4540875660943001" type="box"/>
+		</body>
+		<body pos="1.7220196824782377 2.186198343868981 0.2802126850313523">
+			<freejoint/>
+			<geom rgba="0.741388 0.873449 0.149561 0.989973414371081" size="0.14010634251567616 0.14010634251567616 0.14010634251567616" type="box"/>
+		</body>
+		<body pos="1.039584085186405 3.107095419330821 0.7712339022791539">
+			<freejoint/>
+			<geom rgba="0.212395 0.359683 0.55171 0.9285957622151058" size="0.38561695113957695 0.38561695113957695 0.38561695113957695" type="box"/>
+		</body>
+		<body pos="1.1776391143135374 4.613002469199678 0.2976663202779385">
+			<freejoint/>
+			<geom rgba="0.678489 0.863742 0.189503 0.9877917099652577" size="0.14883316013896924 0.14883316013896924 0.14883316013896924" type="box"/>
+		</body>
+		<body pos="1.6069477082199821 5.080557595788173 0.7265747774884266">
+			<freejoint/>
+			<geom rgba="0.187231 0.414746 0.556547 0.9341781528139467" size="0.3632873887442133 0.3632873887442133 0.3632873887442133" type="box"/>
+		</body>
+		<body pos="1.9540108738907174 6.324233544214184 0.9379920788292295">
+			<freejoint/>
+			<geom rgba="0.283091 0.110553 0.431554 0.9077509901463463" size="0.46899603941461476 0.46899603941461476 0.46899603941461476" type="box"/>
+		</body>
+		<body pos="1.4134398841193319 7.822464496295795 0.8794185861511656">
+			<freejoint/>
+			<geom rgba="0.273006 0.20452 0.501721 0.9150726767311043" size="0.4397092930755828 0.4397092930755828 0.4397092930755828" type="box"/>
+		</body>
+		<body pos="1.7629848671919222 8.272226665977742 0.3937886007148521">
+			<freejoint/>
+			<geom rgba="0.377779 0.791781 0.377939 0.9757764249106435" size="0.19689430035742606 0.19689430035742606 0.19689430035742606" type="box"/>
+		</body>
+		<body pos="1.7204166274612722 9.834491153097026 0.27022695359374443">
+			<freejoint/>
+			<geom rgba="0.772852 0.877868 0.131109 0.991221630800782" size="0.13511347679687222 0.13511347679687222 0.13511347679687222" type="box"/>
+		</body>
+		<body pos="2.3333530572968586 0.15217566187198672 0.7755928293138628">
+			<freejoint/>
+			<geom rgba="0.21621 0.351535 0.550627 0.9280508963357672" size="0.3877964146569314 0.3877964146569314 0.3877964146569314" type="box"/>
+		</body>
+		<body pos="2.154002037553001 1.7301733678546258 0.8183396698428167">
+			<freejoint/>
+			<geom rgba="0.241237 0.296485 0.539709 0.9227075412696479" size="0.40916983492140835 0.40916983492140835 0.40916983492140835" type="box"/>
+		</body>
+		<body pos="2.2441560617126903 2.6881510500243606 0.29496943321744357">
+			<freejoint/>
+			<geom rgba="0.688944 0.865448 0.182725 0.9881288208478196" size="0.14748471660872178 0.14748471660872178 0.14748471660872178" type="box"/>
+		</body>
+		<body pos="2.5748650231586967 3.7303781605347153 0.842836053349755">
+			<freejoint/>
+			<geom rgba="0.255645 0.260703 0.528312 0.9196454933312807" size="0.4214180266748775 0.4214180266748775 0.4214180266748775" type="box"/>
+		</body>
+		<body pos="2.7095329541333237 4.973834975736307 0.2510936049630451">
+			<freejoint/>
+			<geom rgba="0.83527 0.886029 0.102646 0.9936132993796194" size="0.12554680248152256 0.12554680248152256 0.12554680248152256" type="box"/>
+		</body>
+		<body pos="2.0159399222062513 5.766552675005505 0.21196571260462538">
+			<freejoint/>
+			<geom rgba="0.964894 0.902323 0.123941 0.9985042859244219" size="0.10598285630231269 0.10598285630231269 0.10598285630231269" type="box"/>
+		</body>
+		<body pos="2.2937227060402616 6.4351592543379095 0.9882849135255838">
+			<freejoint/>
+			<geom rgba="0.271305 0.019942 0.347269 0.901464385809302" size="0.4941424567627919 0.4941424567627919 0.4941424567627919" type="box"/>
+		</body>
+		<body pos="2.04769090717182 7.5134323928159255 0.3619349823294622">
+			<freejoint/>
+			<geom rgba="0.477504 0.821444 0.318195 0.9797581272088173" size="0.1809674911647311 0.1809674911647311 0.1809674911647311" type="box"/>
+		</body>
+		<body pos="2.6288362786020403 8.274260788952404 0.21440263671802412">
+			<freejoint/>
+			<geom rgba="0.9553 0.901065 0.118128 0.9981996704102469" size="0.10720131835901206 0.10720131835901206 0.10720131835901206" type="box"/>
+		</body>
+		<body pos="2.5755859090043236 9.646600024294997 0.20990260565487606">
+			<freejoint/>
+			<geom rgba="0.964894 0.902323 0.123941 0.9987621742931405" size="0.10495130282743803 0.10495130282743803 0.10495130282743803" type="box"/>
+		</body>
+		<body pos="3.5447495755123812 0.950443377246964 0.75877834869265">
+			<freejoint/>
+			<geom rgba="0.204903 0.375746 0.553533 0.9301527064134187" size="0.379389174346325 0.379389174346325 0.379389174346325" type="box"/>
+		</body>
+		<body pos="3.6282159406251933 1.5211665129977403 0.33915174790669356">
+			<freejoint/>
+			<geom rgba="0.545524 0.838039 0.275626 0.9826060315116633" size="0.16957587395334678 0.16957587395334678 0.16957587395334678" type="box"/>
+		</body>
+		<body pos="3.221080457172481 2.684519568975377 0.7151122426188747">
+			<freejoint/>
+			<geom rgba="0.180629 0.429975 0.557282 0.9356109696726407" size="0.35755612130943737 0.35755612130943737 0.35755612130943737" type="box"/>
+		</body>
+		<body pos="3.6332449925756656 3.6314846729961623 0.3314611217950148">
+			<freejoint/>
+			<geom rgba="0.565498 0.84243 0.262877 0.9835673597756232" size="0.1657305608975074 0.1657305608975074 0.1657305608975074" type="box"/>
+		</body>
+		<body pos="3.2614935033666703 4.862138249724701 0.7763950421520514">
+			<freejoint/>
+			<geom rgba="0.21621 0.351535 0.550627 0.9279506197309936" size="0.3881975210760257 0.3881975210760257 0.3881975210760257" type="box"/>
+		</body>
+		<body pos="3.080981473466277 5.455327564379968 0.4582479625317899">
+			<freejoint/>
+			<geom rgba="0.226397 0.728888 0.462789 0.9677190046835262" size="0.22912398126589495 0.22912398126589495 0.22912398126589495" type="box"/>
+		</body>
+		<body pos="3.675268697180229 6.269310731080317 0.7140279592754819">
+			<freejoint/>
+			<geom rgba="0.180629 0.429975 0.557282 0.9357465050905648" size="0.35701397963774095 0.35701397963774095 0.35701397963774095" type="box"/>
+		</body>
+		<body pos="3.5934481247487216 7.597859385075734 0.25373304525259477">
+			<freejoint/>
+			<geom rgba="0.82494 0.88472 0.106217 0.9932833693434256" size="0.12686652262629738 0.12686652262629738 0.12686652262629738" type="box"/>
+		</body>
+		<body pos="3.151899578854612 8.294417997238824 0.951037995100021">
+			<freejoint/>
+			<geom rgba="0.281924 0.089666 0.412415 0.9061202506124973" size="0.4755189975500105 0.4755189975500105 0.4755189975500105" type="box"/>
+		</body>
+		<body pos="3.0383519751656087 9.273255225112557 0.4973144643593185">
+			<freejoint/>
+			<geom rgba="0.157851 0.683765 0.501686 0.9628356919550852" size="0.24865723217965924 0.24865723217965924 0.24865723217965924" type="box"/>
+		</body>
+		<body pos="4.547193341654261 0.9808160156011277 0.9575676603730663">
+			<freejoint/>
+			<geom rgba="0.280894 0.078907 0.402329 0.9053040424533667" size="0.47878383018653314 0.47878383018653314 0.47878383018653314" type="box"/>
+		</body>
+		<body pos="4.623824073177547 1.0185704707879792 0.5993893536480224">
+			<freejoint/>
+			<geom rgba="0.127568 0.566949 0.550556 0.9500763307939972" size="0.2996946768240112 0.2996946768240112 0.2996946768240112" type="box"/>
+		</body>
+		<body pos="4.491912522651141 2.7199803654928747 0.33836538343266565">
+			<freejoint/>
+			<geom rgba="0.545524 0.838039 0.275626 0.9827043270709168" size="0.16918269171633282 0.16918269171633282 0.16918269171633282" type="box"/>
+		</body>
+		<body pos="4.493528986165881 3.3217476744806103 0.298892014644573">
+			<freejoint/>
+			<geom rgba="0.678489 0.863742 0.189503 0.9876384981694284" size="0.1494460073222865 0.1494460073222865 0.1494460073222865" type="box"/>
+		</body>
+		<body pos="4.116200322893831 4.1907588177904405 0.8394615561533965">
+			<freejoint/>
+			<geom rgba="0.253935 0.265254 0.529983 0.9200673054808255" size="0.41973077807669823 0.41973077807669823 0.41973077807669823" type="box"/>
+		</body>
+		<body pos="4.067902756267289 5.256305630834012 0.6905706674995309">
+			<freejoint/>
+			<geom rgba="0.168126 0.459988 0.558082 0.9386786665625586" size="0.34528533374976544 0.34528533374976544 0.34528533374976544" type="box"/>
+		</body>
+		<body pos="4.1692654315569015 6.684077188049941 0.31652848034705877">
+			<freejoint/>
+			<geom rgba="0.616293 0.852709 0.230052 0.9854339399566177" size="0.15826424017352939 0.15826424017352939 0.15826424017352939" type="box"/>
+		</body>
+		<body pos="4.337445573298571 7.299743433612951 0.8790196386350242">
+			<freejoint/>
+			<geom rgba="0.273006 0.20452 0.501721 0.915122545170622" size="0.4395098193175121 0.4395098193175121 0.4395098193175121" type="box"/>
+		</body>
+		<body pos="4.2542723049083335 8.883696791469923 0.3198106212714429">
+			<freejoint/>
+			<geom rgba="0.606045 0.850733 0.236712 0.9850236723410697" size="0.15990531063572144 0.15990531063572144 0.15990531063572144" type="box"/>
+		</body>
+		<body pos="4.094312667313321 9.306164609512583 0.9212197871726">
+			<freejoint/>
+			<geom rgba="0.282623 0.140926 0.457517 0.9098475266034249" size="0.4606098935863 0.4606098935863 0.4606098935863" type="box"/>
+		</body>
+		<body pos="5.64061484266733 0.6480731043933127 0.6311101664395651">
+			<freejoint/>
+			<geom rgba="0.140536 0.530132 0.555659 0.9461112291950544" size="0.31555508321978254 0.31555508321978254 0.31555508321978254" type="box"/>
+		</body>
+		<body pos="5.1656922709336275 1.2533741577465158 0.6285575716835968">
+			<freejoint/>
+			<geom rgba="0.140536 0.530132 0.555659 0.9464303035395504" size="0.3142787858417984 0.3142787858417984 0.3142787858417984" type="box"/>
+		</body>
+		<body pos="5.5859190362951265 2.0991079728835533 0.8923853755307534">
+			<freejoint/>
+			<geom rgba="0.277134 0.185228 0.489898 0.9134518280586559" size="0.4461926877653767 0.4461926877653767 0.4461926877653767" type="box"/>
+		</body>
+		<body pos="5.763123122210102 3.5288470449348424 0.7058856522379471">
+			<freejoint/>
+			<geom rgba="0.175841 0.44129 0.557685 0.9367642934702566" size="0.35294282611897354 0.35294282611897354 0.35294282611897354" type="box"/>
+		</body>
+		<body pos="5.997044414843 4.290444046684525 0.9175796385044761">
+			<freejoint/>
+			<geom rgba="0.28229 0.145912 0.46151 0.9103025451869404" size="0.45878981925223805 0.45878981925223805 0.45878981925223805" type="box"/>
+		</body>
+		<body pos="5.4215214957009845 5.414897325390084 0.6682678977615952">
+			<freejoint/>
+			<geom rgba="0.157729 0.485932 0.558013 0.9414665127798006" size="0.3341339488807976 0.3341339488807976 0.3341339488807976" type="box"/>
+		</body>
+		<body pos="5.987601001650514 6.955921769055223 0.5138125364548538">
+			<freejoint/>
+			<geom rgba="0.14021 0.665859 0.513427 0.9607734329431433" size="0.2569062682274269 0.2569062682274269 0.2569062682274269" type="box"/>
+		</body>
+		<body pos="5.3825242461448575 7.152700430146639 0.6772423994523372">
+			<freejoint/>
+			<geom rgba="0.162142 0.474838 0.55814 0.9403447000684578" size="0.3386211997261686 0.3386211997261686 0.3386211997261686" type="box"/>
+		</body>
+		<body pos="5.856533923149446 8.716997529961699 0.5185897693347302">
+			<freejoint/>
+			<geom rgba="0.137339 0.662252 0.515571 0.9601762788331587" size="0.2592948846673651 0.2592948846673651 0.2592948846673651" type="box"/>
+		</body>
+		<body pos="5.031115737600671 9.53188239025708 0.734174772025773">
+			<freejoint/>
+			<geom rgba="0.190631 0.407061 0.556089 0.9332281534967783" size="0.3670873860128865 0.3670873860128865 0.3670873860128865" type="box"/>
+		</body>
+		<body pos="6.8005429567811335 0.8943449509170363 0.7320821902112564">
+			<freejoint/>
+			<geom rgba="0.190631 0.407061 0.556089 0.9334897262235929" size="0.3660410951056282 0.3660410951056282 0.3660410951056282" type="box"/>
+		</body>
+		<body pos="6.456590136312098 1.0682316362923534 0.3478280624565828">
+			<freejoint/>
+			<geom rgba="0.515992 0.831158 0.294279 0.9815214921929272" size="0.1739140312282914 0.1739140312282914 0.1739140312282914" type="box"/>
+		</body>
+		<body pos="6.144962244457565 2.004407915315735 0.443468676690878">
+			<freejoint/>
+			<geom rgba="0.259857 0.745492 0.444467 0.9695664154136403" size="0.221734338345439 0.221734338345439 0.221734338345439" type="box"/>
+		</body>
+		<body pos="6.452585861285782 3.4384328674885434 0.6360045900629478">
+			<freejoint/>
+			<geom rgba="0.143343 0.522773 0.556295 0.9454994262421316" size="0.3180022950314739 0.3180022950314739 0.3180022950314739" type="box"/>
+		</body>
+		<body pos="6.056289465383829 4.666471020788271 0.3908491097563762">
+			<freejoint/>
+			<geom rgba="0.386433 0.794644 0.372886 0.9761438612804529" size="0.1954245548781881 0.1954245548781881 0.1954245548781881" type="box"/>
+		</body>
+		<body pos="6.720333939402269 5.154647632126569 0.9968353500345097">
+			<freejoint/>
+			<geom rgba="0.26851 0.009605 0.335427 0.9003955812456863" size="0.49841767501725487 0.49841767501725487 0.49841767501725487" type="box"/>
+		</body>
+		<body pos="6.955431869250466 6.694288413570293 0.6688798262365192">
+			<freejoint/>
+			<geom rgba="0.159194 0.482237 0.558073 0.9413900217204351" size="0.3344399131182596 0.3344399131182596 0.3344399131182596" type="box"/>
+		</body>
+		<body pos="6.102283750737056 7.465980225563477 0.9178488887483665">
+			<freejoint/>
+			<geom rgba="0.28229 0.145912 0.46151 0.9102688889064542" size="0.4589244443741832 0.4589244443741832 0.4589244443741832" type="box"/>
+		</body>
+		<body pos="6.938307904467171 8.087479232772386 0.2719208354922228">
+			<freejoint/>
+			<geom rgba="0.762373 0.876424 0.137064 0.9910098955634722" size="0.1359604177461114 0.1359604177461114 0.1359604177461114" type="box"/>
+		</body>
+		<body pos="6.270566967156889 9.536209818873495 0.7068866435803745">
+			<freejoint/>
+			<geom rgba="0.177423 0.437527 0.557565 0.9366391695524532" size="0.3534433217901872 0.3534433217901872 0.3534433217901872" type="box"/>
+		</body>
+		<body pos="7.82326873248717 0.3255896797543808 0.6337893764283975">
+			<freejoint/>
+			<geom rgba="0.141935 0.526453 0.555991 0.9457763279464503" size="0.31689468821419875 0.31689468821419875 0.31689468821419875" type="box"/>
+		</body>
+		<body pos="7.422376396044584 1.7560200039465796 0.7221708458920968">
+			<freejoint/>
+			<geom rgba="0.185556 0.41857 0.556753 0.9347286442634879" size="0.3610854229460484 0.3610854229460484 0.3610854229460484" type="box"/>
+		</body>
+		<body pos="7.644237332687369 2.0354183453179977 0.4910823486423719">
+			<freejoint/>
+			<geom rgba="0.166383 0.690856 0.496502 0.9636147064197035" size="0.24554117432118594 0.24554117432118594 0.24554117432118594" type="box"/>
+		</body>
+		<body pos="7.719776735596894 3.029177304968914 0.4575405700391369">
+			<freejoint/>
+			<geom rgba="0.226397 0.728888 0.462789 0.967807428745108" size="0.22877028501956845 0.22877028501956845 0.22877028501956845" type="box"/>
+		</body>
+		<body pos="7.825068909365258 4.328367074301391 0.7720084045059097">
+			<freejoint/>
+			<geom rgba="0.214298 0.355619 0.551184 0.9284989494367613" size="0.38600420225295484 0.38600420225295484 0.38600420225295484" type="box"/>
+		</body>
+		<body pos="7.008537555367667 5.215524450955599 0.6344000379221986">
+			<freejoint/>
+			<geom rgba="0.143343 0.522773 0.556295 0.9456999952597251" size="0.3172000189610993 0.3172000189610993 0.3172000189610993" type="box"/>
+		</body>
+		<body pos="7.889538291865996 6.391762753769575 0.9111681307956947">
+			<freejoint/>
+			<geom rgba="0.281412 0.155834 0.469201 0.9111039836505381" size="0.45558406539784735 0.45558406539784735 0.45558406539784735" type="box"/>
+		</body>
+		<body pos="7.791835523416368 7.076768088038252 0.47919632755312097">
+			<freejoint/>
+			<geom rgba="0.185783 0.704891 0.485273 0.9651004590558598" size="0.23959816377656049 0.23959816377656049 0.23959816377656049" type="box"/>
+		</body>
+		<body pos="7.793674916608467 8.082434206875842 0.7750542366148525">
+			<freejoint/>
+			<geom rgba="0.21621 0.351535 0.550627 0.9281182204231434" size="0.38752711830742625 0.38752711830742625 0.38752711830742625" type="box"/>
+		</body>
+		<body pos="7.56737751846049 9.155971977331383 0.828464460147561">
+			<freejoint/>
+			<geom rgba="0.248629 0.278775 0.534556 0.9214419424815549" size="0.4142322300737805 0.4142322300737805 0.4142322300737805" type="box"/>
+		</body>
+		<body pos="8.866781040919193 0.7741644155323331 0.28857019788639593">
+			<freejoint/>
+			<geom rgba="0.709898 0.868751 0.169257 0.9889287252642005" size="0.14428509894319796 0.14428509894319796 0.14428509894319796" type="box"/>
+		</body>
+		<body pos="8.717522052452413 1.6924637888117726 0.8890522400463199">
+			<freejoint/>
+			<geom rgba="0.276194 0.190074 0.493001 0.91386846999421" size="0.44452612002315994 0.44452612002315994 0.44452612002315994" type="box"/>
+		</body>
+		<body pos="8.265762266593114 2.2478963880047784 0.23375413293679115">
+			<freejoint/>
+			<geom rgba="0.89632 0.893616 0.096335 0.9957807333829011" size="0.11687706646839557 0.11687706646839557 0.11687706646839557" type="box"/>
+		</body>
+		<body pos="8.554994812670683 3.5255315252445234 0.9013401968296473">
+			<freejoint/>
+			<geom rgba="0.279574 0.170599 0.479997 0.912332475396294" size="0.45067009841482364 0.45067009841482364 0.45067009841482364" type="box"/>
+		</body>
+		<body pos="8.271067387829616 4.199311262155448 0.6384606385686433">
+			<freejoint/>
+			<geom rgba="0.144759 0.519093 0.556572 0.9451924201789196" size="0.31923031928432166 0.31923031928432166 0.31923031928432166" type="box"/>
+		</body>
+		<body pos="8.803123620985012 5.120079129425337 0.6474325609693312">
+			<freejoint/>
+			<geom rgba="0.149039 0.508051 0.55725 0.9440709298788336" size="0.3237162804846656 0.3237162804846656 0.3237162804846656" type="box"/>
+		</body>
+		<body pos="8.391188337179518 6.861650737953536 0.8271393112902519">
+			<freejoint/>
+			<geom rgba="0.246811 0.283237 0.535941 0.9216075860887185" size="0.41356965564512593 0.41356965564512593 0.41356965564512593" type="box"/>
+		</body>
+		<body pos="8.877977011518764 7.897403483760308 0.7992891036043128">
+			<freejoint/>
+			<geom rgba="0.229739 0.322361 0.545706 0.9250888620494608" size="0.3996445518021564 0.3996445518021564 0.3996445518021564" type="box"/>
+		</body>
+		<body pos="8.967573398957086 8.94489937640049 0.7055218797506104">
+			<freejoint/>
+			<geom rgba="0.175841 0.44129 0.557685 0.9368097650311737" size="0.3527609398753052 0.3527609398753052 0.3527609398753052" type="box"/>
+		</body>
+		<body pos="8.000236202240963 9.08375677782759 0.3549362634485193">
+			<freejoint/>
+			<geom rgba="0.496615 0.826376 0.306377 0.9806329670689351" size="0.17746813172425965 0.17746813172425965 0.17746813172425965" type="box"/>
+		</body>
+		<body pos="9.655787523245065 0.27623567887823663 0.9939352302316624">
+			<freejoint/>
+			<geom rgba="0.26851 0.009605 0.335427 0.9007580962210422" size="0.4969676151158312 0.4969676151158312 0.4969676151158312" type="box"/>
+		</body>
+		<body pos="9.324114837726556 1.866324211819949 0.4708786081722844">
+			<freejoint/>
+			<geom rgba="0.202219 0.715272 0.476084 0.9661401739784644" size="0.2354393040861422 0.2354393040861422 0.2354393040861422" type="box"/>
+		</body>
+		<body pos="9.538619300408094 2.9135664053769816 0.4334422258944952">
+			<freejoint/>
+			<geom rgba="0.281477 0.755203 0.432552 0.9708197217631881" size="0.2167211129472476 0.2167211129472476 0.2167211129472476" type="box"/>
+		</body>
+		<body pos="9.315740413109914 3.8849139008093476 0.6369763005010813">
+			<freejoint/>
+			<geom rgba="0.143343 0.522773 0.556295 0.9453779624373648" size="0.31848815025054067 0.31848815025054067 0.31848815025054067" type="box"/>
+		</body>
+		<body pos="9.069395535224011 4.767805346008424 0.8196818715006478">
+			<freejoint/>
+			<geom rgba="0.243113 0.292092 0.538516 0.922539766062419" size="0.4098409357503239 0.4098409357503239 0.4098409357503239" type="box"/>
+		</body>
+		<body pos="9.157923329139727 5.589264185061202 0.746324732267666">
+			<freejoint/>
+			<geom rgba="0.197636 0.391528 0.554969 0.9317094084665417" size="0.373162366133833 0.373162366133833 0.373162366133833" type="box"/>
+		</body>
+		<body pos="9.722663031256182 6.5254358086742315 0.6178728242202338">
+			<freejoint/>
+			<geom rgba="0.135066 0.544853 0.554029 0.9477658969724708" size="0.3089364121101169 0.3089364121101169 0.3089364121101169" type="box"/>
+		</body>
+		<body pos="9.881738554785843 7.981470368608762 0.38279977904899704">
+			<freejoint/>
+			<geom rgba="0.412913 0.803041 0.357269 0.9771500276188754" size="0.19139988952449852 0.19139988952449852 0.19139988952449852" type="box"/>
+		</body>
+		<body pos="9.910504676719773 8.115230774744566 0.9681317222179524">
+			<freejoint/>
+			<geom rgba="0.278791 0.062145 0.386592 0.9039835347227559" size="0.4840658611089762 0.4840658611089762 0.4840658611089762" type="box"/>
+		</body>
+		<body pos="9.184188911646817 9.268117258058485 0.34387690635185086">
+			<freejoint/>
+			<geom rgba="0.525776 0.833491 0.288127 0.9820153867060186" size="0.17193845317592543 0.17193845317592543 0.17193845317592543" type="box"/>
+		</body>
+		<body name="torso" pos="5 5 2">
+			<camera mode="trackcom" name="track" pos="0 -3 0.3" xyaxes="1 0 0 0 0 1"/>
+			<geom name="torso_geom" pos="0 0 0" size="0.25" type="sphere"/>
+			<joint armature="0" damping="0" limited="false" margin="0.01" name="root" pos="0 0 0" type="free"/>
+			<body name="front_right_leg" pos="0 0 0" euler="0 0 0.0">
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_front_right_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_front_right_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_front_right_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_front_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_front_right_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_front_right_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_front_right_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_front_right_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_front_right_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_front_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_front_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_front_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_front_right_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_front_right_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_front_right_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_front_right_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_front_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_front_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					</body>
+				</body>
+			</body>
+			<body name="front_left_leg" pos="0 0 0" euler="0 0 90">
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_front_left_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_front_left_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_front_left_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_front_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_front_left_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_front_left_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_front_left_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_front_left_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_front_left_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_front_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_front_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_front_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_front_left_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_front_left_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_front_left_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_front_left_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_front_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_front_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					</body>
+				</body>
+			</body>
+			<body name="back_left_leg" pos="0 0 0" euler="0 0 180">
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_back_left_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_back_left_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_back_left_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_back_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_back_left_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_back_left_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_back_left_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_back_left_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_back_left_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_back_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_back_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_back_left_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_back_left_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_back_left_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_back_left_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_back_left_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_back_left_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_back_left_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					</body>
+				</body>
+			</body>
+			<body name="back_right_leg" pos="0 0 0" euler="0 0 270">
+				<geom fromto="0 0 0 0.2 0 0" name="hip_geom_back_right_leg" size="0.08" type="capsule"/>
+				<site name="left_flex_hip_insertion_back_right_leg" pos="0.020000000000000004 0.08 0.0" size="0.04"/>
+				<site name="right_flex_hip_insertion_back_right_leg" pos="0.020000000000000004 -0.08 0.0" size="0.04"/>
+				<geom fromto="0.2 0.0 0.08 0.2 0.0 -0.08" name="hip_joint_geom_back_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+				<body name="thigh_body_back_right_leg" pos="0.2 0 0">
+					<joint axis="0 0 1" name="hip_joint_back_right_leg" pos="0.0 0.0 0.0" range="-30 30" type="hinge"/>
+					<geom fromto="0.0 0.0 0.0 0.4 0.0 0.0" name="thigh_geom_back_right_leg" size="0.08" type="capsule"/>
+					<site name="left_flex_thigh_insertion_back_right_leg" pos="0.32000000000000006 0.08 0.0" size="0.04"/>
+					<site name="right_flex_thigh_insertion_back_right_leg" pos="0.32000000000000006 -0.08 0.0" size="0.04"/>
+					<site name="quad_u_insertion_back_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+					<site name="hamstring_u_insertion_back_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					<geom fromto="0.4 0.08 0.0 0.4 -0.08 0.0" name="knee_geom_back_right_leg" rgba="0.3 0.9 0.3 0.4" size="0.08800000000000001" type="cylinder"/>
+					<site name="knee_top_side_back_right_leg" pos="0.4 0.0 0.16" size="0.01"/>
+					<body name="shin_body_back_right_leg" pos="0.4 0.0 0">
+						<joint axis="0 1 0" name="knee_joint_back_right_leg" pos="0.0 0.0 0.0" range="30 70" type="hinge"/>
+						<geom fromto="0.0 0.0 0.0 0.6 0.0 0.0" name="shin_geom_back_right_leg" size="0.08" type="capsule"/>
+						<site name="quad_l_insertion_back_right_leg" pos="0.12 0.0 0.08" size="0.04"/>
+						<site name="hamstring_l_insertion_back_right_leg" pos="0.12 0.0 -0.08" size="0.04"/>
+					</body>
+				</body>
+			</body>
+		</body>
+	</worldbody>
+	<tendon>
+		<spatial name="left_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_front_right_leg"/>
+			<geom geom="hip_joint_geom_front_right_leg"/>
+			<site site="left_flex_thigh_insertion_front_right_leg"/>
+		</spatial>
+		<spatial name="right_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_front_right_leg"/>
+			<geom geom="hip_joint_geom_front_right_leg"/>
+			<site site="right_flex_thigh_insertion_front_right_leg"/>
+		</spatial>
+		<spatial name="quad_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_front_right_leg"/>
+			<geom geom="knee_geom_front_right_leg" sidesite="knee_top_side_front_right_leg"/>
+			<site site="quad_l_insertion_front_right_leg"/>
+		</spatial>
+		<spatial name="hamstring_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_front_right_leg"/>
+			<geom geom="knee_geom_front_right_leg"/>
+			<site site="hamstring_l_insertion_front_right_leg"/>
+		</spatial>
+		<spatial name="left_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_front_left_leg"/>
+			<geom geom="hip_joint_geom_front_left_leg"/>
+			<site site="left_flex_thigh_insertion_front_left_leg"/>
+		</spatial>
+		<spatial name="right_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_front_left_leg"/>
+			<geom geom="hip_joint_geom_front_left_leg"/>
+			<site site="right_flex_thigh_insertion_front_left_leg"/>
+		</spatial>
+		<spatial name="quad_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_front_left_leg"/>
+			<geom geom="knee_geom_front_left_leg" sidesite="knee_top_side_front_left_leg"/>
+			<site site="quad_l_insertion_front_left_leg"/>
+		</spatial>
+		<spatial name="hamstring_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_front_left_leg"/>
+			<geom geom="knee_geom_front_left_leg"/>
+			<site site="hamstring_l_insertion_front_left_leg"/>
+		</spatial>
+		<spatial name="left_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_back_left_leg"/>
+			<geom geom="hip_joint_geom_back_left_leg"/>
+			<site site="left_flex_thigh_insertion_back_left_leg"/>
+		</spatial>
+		<spatial name="right_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_back_left_leg"/>
+			<geom geom="hip_joint_geom_back_left_leg"/>
+			<site site="right_flex_thigh_insertion_back_left_leg"/>
+		</spatial>
+		<spatial name="quad_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_back_left_leg"/>
+			<geom geom="knee_geom_back_left_leg" sidesite="knee_top_side_back_left_leg"/>
+			<site site="quad_l_insertion_back_left_leg"/>
+		</spatial>
+		<spatial name="hamstring_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_back_left_leg"/>
+			<geom geom="knee_geom_back_left_leg"/>
+			<site site="hamstring_l_insertion_back_left_leg"/>
+		</spatial>
+		<spatial name="left_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="left_flex_hip_insertion_back_right_leg"/>
+			<geom geom="hip_joint_geom_back_right_leg"/>
+			<site site="left_flex_thigh_insertion_back_right_leg"/>
+		</spatial>
+		<spatial name="right_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="right_flex_hip_insertion_back_right_leg"/>
+			<geom geom="hip_joint_geom_back_right_leg"/>
+			<site site="right_flex_thigh_insertion_back_right_leg"/>
+		</spatial>
+		<spatial name="quad_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="quad_u_insertion_back_right_leg"/>
+			<geom geom="knee_geom_back_right_leg" sidesite="knee_top_side_back_right_leg"/>
+			<site site="quad_l_insertion_back_right_leg"/>
+		</spatial>
+		<spatial name="hamstring_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+			<site site="hamstring_u_insertion_back_right_leg"/>
+			<geom geom="knee_geom_back_right_leg"/>
+			<site site="hamstring_l_insertion_back_right_leg"/>
+		</spatial>
+	</tendon>
+	<actuator>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_front_right_leg" tendon="quad_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_front_right_leg" tendon="hamstring_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_front_right_leg" tendon="right_hip_flex_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_front_right_leg" tendon="left_hip_flex_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_front_left_leg" tendon="quad_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_front_left_leg" tendon="hamstring_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_front_left_leg" tendon="right_hip_flex_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_front_left_leg" tendon="left_hip_flex_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_back_left_leg" tendon="quad_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_back_left_leg" tendon="hamstring_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_back_left_leg" tendon="right_hip_flex_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_back_left_leg" tendon="left_hip_flex_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_back_right_leg" tendon="quad_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_back_right_leg" tendon="hamstring_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_back_right_leg" tendon="right_hip_flex_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_back_right_leg" tendon="left_hip_flex_back_right_leg"/>
+	</actuator>
+</mujoco>
