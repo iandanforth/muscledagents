@@ -5,6 +5,7 @@ import numpy as np
 
 from gym import wrappers, logger
 
+
 class RandomAgent(object):
     """The world's simplest agent!"""
     def __init__(self, action_space):
@@ -14,6 +15,7 @@ class RandomAgent(object):
         action = self.action_space.sample()
         action = np.zeros(3)
         return action
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=None)

@@ -115,103 +115,103 @@
 		</body>
 	</worldbody>
 	<tendon>
-		<spatial name="left_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="left_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="left_flex_hip_insertion_front_right_leg"/>
 			<geom geom="hip_joint_geom_front_right_leg"/>
 			<site site="left_flex_thigh_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="right_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="right_hip_flex_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="right_flex_hip_insertion_front_right_leg"/>
 			<geom geom="hip_joint_geom_front_right_leg"/>
 			<site site="right_flex_thigh_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="quad_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="quad_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="quad_u_insertion_front_right_leg"/>
 			<geom geom="knee_geom_front_right_leg" sidesite="knee_top_side_front_right_leg"/>
 			<site site="quad_l_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="hamstring_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="hamstring_front_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="hamstring_u_insertion_front_right_leg"/>
 			<geom geom="knee_geom_front_right_leg"/>
 			<site site="hamstring_l_insertion_front_right_leg"/>
 		</spatial>
-		<spatial name="left_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="left_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="left_flex_hip_insertion_front_left_leg"/>
 			<geom geom="hip_joint_geom_front_left_leg"/>
 			<site site="left_flex_thigh_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="right_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="right_hip_flex_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="right_flex_hip_insertion_front_left_leg"/>
 			<geom geom="hip_joint_geom_front_left_leg"/>
 			<site site="right_flex_thigh_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="quad_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="quad_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="quad_u_insertion_front_left_leg"/>
 			<geom geom="knee_geom_front_left_leg" sidesite="knee_top_side_front_left_leg"/>
 			<site site="quad_l_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="hamstring_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="hamstring_front_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="hamstring_u_insertion_front_left_leg"/>
 			<geom geom="knee_geom_front_left_leg"/>
 			<site site="hamstring_l_insertion_front_left_leg"/>
 		</spatial>
-		<spatial name="left_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="left_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="left_flex_hip_insertion_back_left_leg"/>
 			<geom geom="hip_joint_geom_back_left_leg"/>
 			<site site="left_flex_thigh_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="right_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="right_hip_flex_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="right_flex_hip_insertion_back_left_leg"/>
 			<geom geom="hip_joint_geom_back_left_leg"/>
 			<site site="right_flex_thigh_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="quad_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="quad_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="quad_u_insertion_back_left_leg"/>
 			<geom geom="knee_geom_back_left_leg" sidesite="knee_top_side_back_left_leg"/>
 			<site site="quad_l_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="hamstring_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="hamstring_back_left_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="hamstring_u_insertion_back_left_leg"/>
 			<geom geom="knee_geom_back_left_leg"/>
 			<site site="hamstring_l_insertion_back_left_leg"/>
 		</spatial>
-		<spatial name="left_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="left_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="left_flex_hip_insertion_back_right_leg"/>
 			<geom geom="hip_joint_geom_back_right_leg"/>
 			<site site="left_flex_thigh_insertion_back_right_leg"/>
 		</spatial>
-		<spatial name="right_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="right_hip_flex_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="right_flex_hip_insertion_back_right_leg"/>
 			<geom geom="hip_joint_geom_back_right_leg"/>
 			<site site="right_flex_thigh_insertion_back_right_leg"/>
 		</spatial>
-		<spatial name="quad_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="quad_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="quad_u_insertion_back_right_leg"/>
 			<geom geom="knee_geom_back_right_leg" sidesite="knee_top_side_back_right_leg"/>
 			<site site="quad_l_insertion_back_right_leg"/>
 		</spatial>
-		<spatial name="hamstring_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="1000" width="0.04">
+		<spatial name="hamstring_back_right_leg" rgba="0.95 0.3 0.3 1" stiffness="100" width="0.04">
 			<site site="hamstring_u_insertion_back_right_leg"/>
 			<geom geom="knee_geom_back_right_leg"/>
 			<site site="hamstring_l_insertion_back_right_leg"/>
 		</spatial>
 	</tendon>
 	<actuator>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_front_right_leg" tendon="quad_front_right_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_front_right_leg" tendon="hamstring_front_right_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_front_right_leg" tendon="right_hip_flex_front_right_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_front_right_leg" tendon="left_hip_flex_front_right_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_front_left_leg" tendon="quad_front_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_front_left_leg" tendon="hamstring_front_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_front_left_leg" tendon="right_hip_flex_front_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_front_left_leg" tendon="left_hip_flex_front_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_back_left_leg" tendon="quad_back_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_back_left_leg" tendon="hamstring_back_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_back_left_leg" tendon="right_hip_flex_back_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_back_left_leg" tendon="left_hip_flex_back_left_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="quad_act_back_right_leg" tendon="quad_back_right_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="hamstring_act_back_right_leg" tendon="hamstring_back_right_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="right_hip_flex_act_back_right_leg" tendon="right_hip_flex_back_right_leg"/>
-		<general ctrllimited="true" ctrlrange="-3.0 0.0" gainprm="200" name="left_hip_flex_act_back_right_leg" tendon="left_hip_flex_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="quad_act_front_right_leg" tendon="quad_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="hamstring_act_front_right_leg" tendon="hamstring_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="right_hip_flex_act_front_right_leg" tendon="right_hip_flex_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="left_hip_flex_act_front_right_leg" tendon="left_hip_flex_front_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="quad_act_front_left_leg" tendon="quad_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="hamstring_act_front_left_leg" tendon="hamstring_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="right_hip_flex_act_front_left_leg" tendon="right_hip_flex_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="left_hip_flex_act_front_left_leg" tendon="left_hip_flex_front_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="quad_act_back_left_leg" tendon="quad_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="hamstring_act_back_left_leg" tendon="hamstring_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="right_hip_flex_act_back_left_leg" tendon="right_hip_flex_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="left_hip_flex_act_back_left_leg" tendon="left_hip_flex_back_left_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="quad_act_back_right_leg" tendon="quad_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="hamstring_act_back_right_leg" tendon="hamstring_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="right_hip_flex_act_back_right_leg" tendon="right_hip_flex_back_right_leg"/>
+		<general ctrllimited="true" ctrlrange="-1.0 0.0" gainprm="100" name="left_hip_flex_act_back_right_leg" tendon="left_hip_flex_back_right_leg"/>
 	</actuator>
 </mujoco>

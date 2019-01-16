@@ -5,30 +5,32 @@ from pymuscle import StandardMuscle as Muscle
 
 
 class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
-    def __init__(self, apply_fatigue=True):
+    def __init__(self):
 
+        # Create the muscles for this ant
         self.muscle_count = 16
-        self.muscles = self._get_muscles(self.muscle_count, apply_fatigue)
+        self.muscles = self._get_muscles(self.muscle_count)
+        self.muscle_fatigues = np.zeros(self.muscle_count)
 
         # Initialize parents
         mujoco_env.MujocoEnv.__init__(self, 'muscled-ant.xml', 4)
         utils.EzPickle.__init__(self)
 
-        # Override the action space
-
     def _get_muscles(
         self,
         muscle_count,
-        apply_fatigue=True,
-        motor_unit_count=900
+        max_force=100.0
     ):
         """
         Create N muscles where N is the number of actuators specified in the
         model file.
+
+        Note: max_force should be kept in line with the gainprm on actuators
+        in the muscled-ant.xml
         """
         muscles = []
         for i in range(muscle_count):
-            muscle = Muscle(motor_unit_count, apply_fatigue)
+            muscle = Muscle(max_force)
             muscles.append(muscle)
 
         return muscles
@@ -36,18 +38,22 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def step(self, a):
         xposbefore = self.get_body_com("torso")[0]
 
-        # Get output from muscles
+        # Step the muscle sims
+        # Collect output and fatigue levels
         outputs = []
+        fatigues = []
         for i, muscle in enumerate(self.muscles):
             output = muscle.step(a[i], 0.002 * self.frame_skip)
+            fatigues.append(muscle.get_peripheral_fatigue())
+            output = -1 * output
             outputs.append(output)
+        self.muscle_fatigues = np.array(fatigues)
 
-        # TODO: Use np arrays all the way down
+        # Step the physics sim
         outputs = np.array(outputs)
-        outputs /= 5305
-        outputs *= -1
-
         self.do_simulation(outputs, self.frame_skip)
+
+        # Calculate reward and see if we're done
         xposafter = self.get_body_com("torso")[0]
         forward_reward = (xposafter - xposbefore)/self.dt
         ctrl_cost = .5 * np.square(a).sum()
@@ -59,7 +65,10 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         notdone = np.isfinite(state).all() \
             and state[2] >= 0.2 and state[2] <= 1.0
         done = not notdone
+
+        # Get environment observations
         ob = self._get_obs()
+
         return ob, reward, done, dict(
             reward_forward=forward_reward,
             reward_ctrl=-ctrl_cost,
@@ -71,12 +80,14 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             self.sim.data.qpos.flat[2:],
             self.sim.data.qvel.flat,
             np.clip(self.sim.data.cfrc_ext, -1, 1).flat,
+            self.muscle_fatigues
         ])
 
     def reset_model(self):
         qpos = self.init_qpos + self.np_random.uniform(size=self.model.nq, low=-.1, high=.1)
         qvel = self.init_qvel + self.np_random.randn(self.model.nv) * .1
         self.set_state(qpos, qvel)
+        self.muscle_fatigues = np.zeros(self.muscle_count)
         return self._get_obs()
 
     def viewer_setup(self):

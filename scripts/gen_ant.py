@@ -219,7 +219,7 @@ def get_leg(
     tendons = []
     tendon_width = 0.04
     tendon_color = [0.95, 0.3, 0.3, 1]
-    tendon_stiffness = 1000
+    tendon_stiffness = 100
     left_hip_flex = e.Spatial(
         name="left_hip_flex_"+name,
         width=tendon_width,
@@ -289,33 +289,34 @@ def get_leg(
     # Actuators
     # TODO: Replace with Muscles once 2.0 is released
     actuators = []
-    act_gain = 200
-    act_ctrl_range = [-3.0, 0.0]
+    act_gain = 100  # Max 100N output
+    act_ctrl_range = [-1.0, 0.0]
+    ctrllimited = "true"
     quad_act = e.General(
         name="quad_act_"+name,
         tendon=quad.name,
-        ctrllimited="true",
+        ctrllimited=ctrllimited,
         gainprm=act_gain,
         ctrlrange=act_ctrl_range
     )
     hamstring_act = e.General(
         name="hamstring_act_"+name,
         tendon=hamstring.name,
-        ctrllimited="true",
+        ctrllimited=ctrllimited,
         gainprm=act_gain,
         ctrlrange=act_ctrl_range
     )
     right_hip_flex_act = e.General(
         name="right_hip_flex_act_"+name,
         tendon=right_hip_flex.name,
-        ctrllimited="true",
+        ctrllimited=ctrllimited,
         gainprm=act_gain,
         ctrlrange=act_ctrl_range
     )
     left_hip_flex_act = e.General(
         name="left_hip_flex_act_"+name,
         tendon=left_hip_flex.name,
-        ctrllimited="true",
+        ctrllimited=ctrllimited,
         gainprm=act_gain,
         ctrlrange=act_ctrl_range
     )
