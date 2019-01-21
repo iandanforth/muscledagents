@@ -1,5 +1,6 @@
 import numpy as np
-from gym import utils
+from gym import utils, spaces
+from mujoco_py import MujocoException
 from . import mujoco_env
 from pymuscle import StandardMuscle as Muscle
 
@@ -12,8 +13,17 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         self.muscles = self._get_muscles(self.muscle_count)
         self.muscle_fatigues = np.zeros(self.muscle_count)
 
-        # Initialize parents
+        # Initialize parent
         mujoco_env.MujocoEnv.__init__(self, 'muscled-ant.xml', 4)
+
+        # Overwrite the action space
+        # PyMuscles provide an abstraction over the underlying sim
+        # We want to specify an input to the pymuscles and let them handle
+        # inputs to the simulated actuators.
+        low = np.zeros(self.muscle_count)
+        high = np.ones(self.muscle_count)
+        self.action_space = spaces.Box(low=low, high=high)
+
         utils.EzPickle.__init__(self)
 
     def _get_muscles(
@@ -51,20 +61,43 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
         # Step the physics sim
         outputs = np.array(outputs)
-        self.do_simulation(outputs, self.frame_skip)
+
+        # This model can randomly become unstable
+        # Until this can be reproduced reliably this hack will
+        # have to do.
+        unstable = 0
+        try:
+            self.do_simulation(outputs, self.frame_skip)
+        except MujocoException as e:
+            print(e)
+            unstable = 1
 
         # Calculate reward and see if we're done
         xposafter = self.get_body_com("torso")[0]
         forward_reward = (xposafter - xposbefore)/self.dt
         ctrl_cost = .5 * np.square(a).sum()
-        contact_cost = 0.5 * 1e-3 * np.sum(
-            np.square(np.clip(self.sim.data.cfrc_ext, -1, 1)))
+        # cfrc_ext is "com-based external force on body         (nbody x 6)"
+        # I don't know what this means or why it is scaled
+        # to this level.
+        contact_cost = 0.5 * 0.001 * np.sum(
+            np.square(np.clip(self.sim.data.cfrc_ext, -1, 1))
+        )
         survive_reward = 1.0
         reward = forward_reward - ctrl_cost - contact_cost + survive_reward
+        # TODO: Remove this
+        reward = forward_reward - unstable
+
+        # State is a flattened combination of qpos and qvel
+        # Here it has 29 items
         state = self.state_vector()
-        notdone = np.isfinite(state).all() \
-            and state[2] >= 0.2 and state[2] <= 1.0
+
+        # Done conditions
+        #   - Some value of state is infinite
+        #   - The agent is not too low (z <= 0.2) or too high z >=1.0
+        notdone = np.isfinite(state).all() and state[2] >= 0.2 and state[2] <= 1.0
         done = not notdone
+        if unstable != 0:
+            done = True
 
         # Get environment observations
         ob = self._get_obs()
