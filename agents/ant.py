@@ -55,123 +55,94 @@ tendons.
 """
 import math
 import numpy as np
-from collections import deque
-from muscledagents.envs.mujoco import MuscledAntEnv
+import muscledagents
+import re
+import pickle
+import time
 
-import torch
-torch.manual_seed(0)  # set random seed
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torch.distributions import Categorical
-
-
-class Policy(nn.Module):
-    """
-    Code originally from Udacity Deep Reinforcement Learning Examples
-    """
-    def __init__(self, device, s_size=4, h_size=16, a_size=2):
-
-        super(Policy, self).__init__()
-        self.device = device
-        self.fc1 = nn.Linear(s_size, h_size)
-        self.fc2 = nn.Linear(h_size, a_size)
-
-    def forward(self, x):
-        x = F.relu(self.fc1(x))
-        x = self.fc2(x)
-        return F.sigmoid(x)
-
-    def act(self, state):
-        """
-        I think that pytorch is doing a lot of magic here. Eventually
-        we want to use the log_prob value returned to start our backward
-        pass, which eventually calculates updates to our weights.
-
-        Under the hood it must be linking all the operations on the
-        tensors state, probs, m, action and m.log_prob(action)
-
-        By keeping track of how that single value was generated it might be
-        inferring how to calculate gradients.
-        """
-        state = torch.from_numpy(state).float().unsqueeze(0).to(self.device)
-        probs = self.forward(state).cpu()
-        m = Categorical(probs)
-        action = m.sample()
-        return action.item(), m.log_prob(action)
+import gym
+from gym import logger
+from mujoco_py import MujocoException
 
 
-def reinforce(
-    env,
-    policy,
-    optimizer,
-    n_episodes=1000,
-    max_t=1000,
-    gamma=1.0,
-    print_every=100
-):
-    # Collect scores to calculate average performance
-    scores_deque = deque(maxlen=100)
-    scores = []
+def load_action_log(filepath):
+    cleanlines = []
+    with open(filepath, 'r') as fh:
+        cleanline = []
+        close_count = 0
+        for line in fh:
+            for char in line:
+                if close_count == 2:
+                    str_line = "".join(cleanline)
+                    str_line = re.sub(' +', ' ', str_line)
+                    str_line = str_line.strip()
+                    str_line = re.sub('\n', '', str_line)
+                    cleanlines.append(str_line)
+                    cleanline = []
+                    close_count = 0
+                if char == "[":
+                    continue
+                if char == "]":
+                    close_count += 1
+                    continue
+                cleanline.append(char)
 
-    # Train the policy for at most n_episodes
-    for i_episode in range(1, n_episodes+1):
-        saved_log_probs = []
-        rewards = []
-        state = env.reset()
-        # Collect 1 episode
-        for t in range(max_t):
-            action, log_prob = policy.act(state)
-            saved_log_probs.append(log_prob)
-            state, reward, done, _ = env.step(action)
-            rewards.append(reward)
-            if done:
-                break
+    # Further cleaning
+    clean_arrays = []
+    for line in cleanlines:
+        arr = line.split(" ")
+        arr = [float(x) for x in arr]
+        clean_arrays.append(arr)
 
-        reward_total = sum(rewards)
-        scores_deque.append(reward_total)  # Last 100 scores
-        scores.append(reward_total)  # All scores
-
-        discounts = [gamma**i for i in range(len(rewards)+1)]
-        # Calculate sum of discounted rewards
-        R = sum([a*b for a, b in zip(discounts, rewards)])  # NOTE: This seems wrong. If you have intermediate rewards why sum them here?
-
-        policy_loss = []
-        for log_prob in saved_log_probs:
-            policy_loss.append(-log_prob * R)
-        policy_loss = torch.cat(policy_loss).sum()
-
-        optimizer.zero_grad()  # Clear old gradients that pytorch may be holding
-        policy_loss.backward()  # Calculate gradients
-        optimizer.step()  # Update network weights
-
-        if i_episode % print_every == 0:
-            print('Episode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)))
-        if np.mean(scores_deque) >= 195.0:
-            print('Environment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode-100, np.mean(scores_deque)))
-            break
-
-    return scores
+    return clean_arrays
 
 
 def main():
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    print(device)
-
-    env = MuscledAntEnv()
+    # Load a standard ant
+    env = gym.make("MuscledAnt-v0")
+    env.reset()
 
     print("Observation Space Dims", env.observation_space.shape)
     print("Action Space Dims", env.action_space.shape)
 
     input_size = env.observation_space.shape[0]
     action_size = env.action_space.shape[0]
-    policy = Policy(
-        device,
-        input_size,
-        input_size * 6,
-        action_size
-    )
+
+    actions = pickle.load(open("crash-actions-1547839500.p", "rb"))
+    while True:
+        for action in actions:
+            env.step(action)
+            env.render()
+        env.reset()
+
+    quit()
+
+    # actions = load_action_log("crash.txt")
+    # for action in actions:
+    #     env.step(action)
+    #     env.render()
+
+    # quit()
+
+    ep_counter = 0
+    action_list = []
+    while True:
+        action = np.random.rand(16)
+        action_list.append(action)
+        try:
+            ob, reward, done, extras = env.step(action)
+            # env.render()
+        except MujocoException as e:
+            filename = "crash-actions-{}.p".format(int(time.time()))
+            print("Dumping action list to {}".format(filename))
+            pickle.dump(action_list, open(filename, 'wb'))
+            import web_pdb; web_pdb.set_trace()
+        if done:
+            print("Episode {}".format(ep_counter))
+            ep_counter += 1
+            action_list = []
+            env.reset()
 
     # Set up the simulation parameters
     sim_duration = 60  # seconds
@@ -181,13 +152,14 @@ def main():
 
     # Step according to a complex pattern
     # https://www.desmos.com/calculator/c0uq1mul2a
-    action = [0.0] * env.muscle_count
+    action = [0.0] * action_size
     for i in range(total_steps):
         action[1] = ((math.sin(i / 25) + 1) / 2)
         action[5] = ((math.sin(i / 35) + 1) / 2)
         action[9] = ((math.sin(i / 45) + 1) / 2)
         action[13] = ((math.sin(i / 55) + 1) / 2)
-        env.step(action)
+        ob, reward, done, extras = env.step(action)
+        print(done)
         env.render()
 
 
