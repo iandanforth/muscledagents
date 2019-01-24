@@ -1,5 +1,6 @@
 import os
 from mjcf import elements as e
+from colors import rgb_to_decimal
 
 
 def get_ant(name="ant1", location=[0, 0, 0.75]):
@@ -397,14 +398,15 @@ def main():
     )
     default.add_children([d_joint, d_geom])
 
-    # Asset
+    # Assets
     tex1 = e.Texture(
-        builtin="gradient",
-        height=100,
-        rgb1=[1, 1, 1],
-        rgb2=[0, 0, 0],
         type="skybox",
-        width=100
+        fileright="sunny-right.png",
+        fileleft="sunny-left.png",
+        fileup="sunny-up.png",
+        filedown="sunny-down.png",
+        filefront="sunny-front.png",
+        fileback="sunny-back.png"
     )
     tex2 = e.Texture(
         builtin="flat",
@@ -413,8 +415,8 @@ def main():
         markrgb=[1, 1, 1],
         name="texgeom",
         random=0.01,
-        rgb1=[0.8, 0.6, 0.4],
-        rgb2=[0.8, 0.6, 0.4],
+        rgb1=rgb_to_decimal(220, 227, 233),
+        rgb2=rgb_to_decimal(231, 235, 246),
         type="cube",
         width=127
     )
@@ -422,8 +424,8 @@ def main():
         builtin="checker",
         height=[100],
         name="texplane",
-        rgb1=[0, 0, 0],
-        rgb2=[0.8, 0.8, 0.8],
+        rgb1=rgb_to_decimal(210, 207, 241),
+        rgb2=rgb_to_decimal(110, 163, 230),
         type="2d",
         width=100
     )
@@ -440,6 +442,7 @@ def main():
         texture="texgeom",
         texuniform=True
     )
+
     asset.add_children([
         tex1,
         tex2,
@@ -471,7 +474,7 @@ def main():
 
     worldbody.add_children([
         light,
-        floor_geom
+        floor_geom,
     ])
 
     ant_bodies = []

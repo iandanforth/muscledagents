@@ -59,6 +59,7 @@ import muscledagents
 import re
 import pickle
 import time
+import mujoco_py
 
 import gym
 from gym import logger
@@ -109,14 +110,14 @@ def main():
     input_size = env.observation_space.shape[0]
     action_size = env.action_space.shape[0]
 
-    actions = pickle.load(open("crash-actions-1547839500.p", "rb"))
-    while True:
-        for action in actions:
-            env.step(action)
-            env.render()
-        env.reset()
+    # actions = pickle.load(open("crash-actions-1547839500.p", "rb"))
+    # while True:
+    #     for action in actions:
+    #         env.step(action)
+    #         env.render()
+    #     env.reset()
 
-    quit()
+    # quit()
 
     # actions = load_action_log("crash.txt")
     # for action in actions:
@@ -125,27 +126,27 @@ def main():
 
     # quit()
 
-    ep_counter = 0
-    action_list = []
-    while True:
-        action = np.random.rand(16)
-        action_list.append(action)
-        try:
-            ob, reward, done, extras = env.step(action)
-            # env.render()
-        except MujocoException as e:
-            filename = "crash-actions-{}.p".format(int(time.time()))
-            print("Dumping action list to {}".format(filename))
-            pickle.dump(action_list, open(filename, 'wb'))
-            import web_pdb; web_pdb.set_trace()
-        if done:
-            print("Episode {}".format(ep_counter))
-            ep_counter += 1
-            action_list = []
-            env.reset()
+    # ep_counter = 0
+    # action_list = []
+    # while True:
+    #     action = np.random.rand(16)
+    #     action_list.append(action)
+    #     try:
+    #         ob, reward, done, extras = env.step(action)
+    #         # env.render()
+    #     except MujocoException as e:
+    #         filename = "crash-actions-{}.p".format(int(time.time()))
+    #         print("Dumping action list to {}".format(filename))
+    #         pickle.dump(action_list, open(filename, 'wb'))
+    #         import web_pdb; web_pdb.set_trace()
+    #     if done:
+    #         print("Episode {}".format(ep_counter))
+    #         ep_counter += 1
+    #         action_list = []
+    #         env.reset()
 
     # Set up the simulation parameters
-    sim_duration = 60  # seconds
+    sim_duration = 360  # seconds
     frames_per_second = 50
     step_size = 1 / frames_per_second
     total_steps = int(sim_duration / step_size)
@@ -159,9 +160,7 @@ def main():
         action[9] = ((math.sin(i / 45) + 1) / 2)
         action[13] = ((math.sin(i / 55) + 1) / 2)
         ob, reward, done, extras = env.step(action)
-        print(done)
         env.render()
-
 
 if __name__ == '__main__':
     main()
