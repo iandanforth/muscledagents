@@ -2,6 +2,8 @@
 OpenAI Gym MuJoCo models rigged with muscles and environments which
 incorporate [PyMuscle](http://github.com/iandanforth/pymuscle) fatigable muscle models.
 
+<img src="https://user-images.githubusercontent.com/446062/51863364-a7db2680-22f5-11e9-97e9-582feccf44c6.png" width="50%">
+
 ## Prerequisites
 
  - MuJoCo 1.5
