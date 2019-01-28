@@ -29,7 +29,7 @@ and moving in a simple dance-like pattern.
 
 ## Usage
 
-"""python
+```python
 import gym
 import muscledagents
 import math
@@ -60,7 +60,7 @@ def main():
 if __name__ == '__main__':
     main()
 
-"""
+```
 
 To explore these environments and models further you will need to understand
 how input values get translated into final simulated movements.
