@@ -1,6 +1,6 @@
 # MuscledAgents
-OpenAI Gym MuJoCo models rigged with muscles and environments which
-incorporate [PyMuscle](http://github.com/iandanforth/pymuscle) fatigable muscle models.
+OpenAI Gym MuJoCo environments rigged with muscles which can be used with
+[PyMuscle](http://github.com/iandanforth/pymuscle) fatigable muscle models.
 
 <img src="https://user-images.githubusercontent.com/446062/51863364-a7db2680-22f5-11e9-97e9-582feccf44c6.png" width="50%">
 
@@ -28,6 +28,39 @@ If things go well you'll see the standard `ant` model now rigged with tendons
 and moving in a simple dance-like pattern.
 
 ## Usage
+
+"""python
+import gym
+import muscledagents
+import math
+
+
+def main():
+
+    # Load a muscled ant
+    env = gym.make("MuscledAnt-v0")
+    env.reset()
+
+    print("Observation Space Dims", env.observation_space.shape)
+    print("Action Space Dims", env.action_space.shape)
+
+    action_size = env.action_space.shape[0]
+
+    action = [0.0] * action_size
+    total_steps = 60 * 10
+    for i in range(total_steps):
+        action[1] = ((math.sin(i / 25) + 1) / 2)
+        action[5] = ((math.sin(i / 35) + 1) / 2)
+        action[9] = ((math.sin(i / 45) + 1) / 2)
+        action[13] = ((math.sin(i / 55) + 1) / 2)
+        env.step(action)
+        env.render()
+
+
+if __name__ == '__main__':
+    main()
+
+"""
 
 To explore these environments and models further you will need to understand
 how input values get translated into final simulated movements.
