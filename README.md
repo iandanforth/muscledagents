@@ -8,24 +8,13 @@ OpenAI Gym MuJoCo environments rigged with muscles which can be used with
 
  - MuJoCo 1.5
  - mujoco-py
+ - gym
 
 ## Setup
 
 ```
 python setup.py develop
 ```
-
-## Getting Started
-
-The only functional environment is currently `ant`. Please run that as follows
-
-```
-cd agents
-python ant.py
-```
-
-If things go well you'll see the standard `ant` model now rigged with tendons
-and moving in a simple dance-like pattern.
 
 ## Usage
 
@@ -38,7 +27,7 @@ import math
 def main():
 
     # Load a muscled ant
-    env = gym.make("MuscledAnt-v0")
+    env = gym.make("MuscledAnt-v0")  # Only functional env at the moment
     env.reset()
 
     print("Observation Space Dims", env.observation_space.shape)
