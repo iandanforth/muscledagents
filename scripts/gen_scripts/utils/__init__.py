@@ -1,6 +1,7 @@
-from . import colors
+import os
 from .colors import rgb_to_decimal
 from mjcf import elements as e
+
 
 def populated_ma_asset(asset):
     """
@@ -60,6 +61,7 @@ def populated_ma_asset(asset):
         mat2,
     ])
 
+
 def populate_ma_worldbody(worldbody):
     """
     Adds a standard MuscledAgents floor and global light to the provided
@@ -91,3 +93,64 @@ def populate_ma_worldbody(worldbody):
         light,
         floor_geom,
     ])
+
+
+def splitall(path):
+    """
+    Split a path into a list of all its components
+
+    Credit: Trent Mick
+    https://www.oreilly.com/library/view/python-cookbook/0596001673/ch04s16.html
+    """
+    allparts = []
+    while 1:
+        parts = os.path.split(path)
+        if parts[0] == path:  # sentinel for absolute paths
+            allparts.insert(0, parts[0])
+            break
+        elif parts[1] == path:  # sentinel for relative paths
+            allparts.insert(0, parts[1])
+            break
+        else:
+            path = parts[0]
+            allparts.insert(0, parts[1])
+    return allparts
+
+
+def get_ma_abspath():
+    """
+    Returns the absolute path to the muscled agents module
+    dir.
+    """
+    this_abspath = os.path.abspath(__file__)
+    parts = splitall(this_abspath)
+    parts.reverse()
+    i = 0
+    # Walk backward through the path to the first instance
+    # of 'muscledagents'
+    for p in parts:
+        if p == "muscledagents":
+            break
+        i += 1
+
+    # Flip the list again and grab the bits we want
+    parts.reverse()
+    last_part_ind = len(parts) - i
+    desired_pieces = parts[:last_part_ind]
+    abspath = os.path.join(*desired_pieces)
+    return abspath
+
+
+def save_model(model_xml, filename):
+
+    basepath = get_ma_abspath()
+    out_path = os.path.join(
+        basepath,
+        "muscledagents",  # Actual module dir under repo dir
+        "envs",
+        "mujoco",
+        "assets",
+        filename
+    )
+    with open(out_path, 'w') as fh:
+        fh.write(model_xml)

@@ -1,6 +1,6 @@
-import os
 import utils
 from mjcf import elements as e
+
 
 def get_ant(name="ant1", location=[0, 0, 0.75]):
 
@@ -330,8 +330,6 @@ def get_leg(
     return hip, tendons, actuators
 
 
-
-
 def main():
     #########################
     # Level 1
@@ -422,18 +420,8 @@ def main():
     actuator.add_children(ant_actuators)
 
     model_xml = mujoco.xml()
-
-    # Output
-    out_path = os.path.join(
-        "..",
-        "muscledagents",
-        "envs",
-        "mujoco",
-        "assets",
-        "muscled-ant.xml"
-    )
-    with open(out_path, 'w') as fh:
-        fh.write(model_xml)
+    filename = "muscled-ant.xml"
+    utils.save_model(model_xml, filename)
 
 
 if __name__ == '__main__':
