@@ -331,14 +331,10 @@ def get_leg(
 
 
 def main():
-    #########################
-    # Level 1
     mujoco = e.Mujoco(
         model="ant"
     )
 
-    #########################
-    # Level 2
     compiler = e.Compiler(
         angle="degree",
         coordinate="local",
@@ -370,9 +366,6 @@ def main():
         tendon,
         actuator
     ])
-
-    ######################
-    # Level 3
 
     # Custom
     numeric = e.Numeric(
