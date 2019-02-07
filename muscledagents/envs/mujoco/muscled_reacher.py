@@ -6,6 +6,12 @@ from .base_muscled_env import BaseMuscledEnv
 class MuscledReacherEnv(BaseMuscledEnv):
 
     def __init__(self):
+
+        # Values to be populated on first step()
+        self.fingertip_vec = None
+        self.target_vec = None
+        self.dist_vec = None
+
         super().__init__(
             muscle_count=4,
             xml_filename='muscled-reacher.xml'
@@ -28,22 +34,34 @@ class MuscledReacherEnv(BaseMuscledEnv):
 
         self.do_simulation(outputs, self.frame_skip)
 
-        # Get environment observations
+        # Observation
         ob = self._get_obs()
 
-        # TODO: Implement reward function
-        reward = 0
+        # Reward
+        # Note that all ctrl penalties are removed in muscled envs
+        # self.dist_vec is updated in _get_obs() above
+        reward = -np.linalg.norm(self.dist_vec)
 
-        # TODO: Implement done cases
+        # Done
+        # There are no termination conditions in this env
         done = False
 
-        # TODO: Populate info dict
-        info = dict()
+        # Info
+        info = dict(reward=reward)
 
         return ob, reward, done, info
 
     def _get_obs(self):
+        theta = self.sim.data.qpos.flat[:2]
+        fingertip_vec = self.get_body_com("fingertip_body")
+        target_vec = self.get_body_com("target_body")
+        self.dist_vec = fingertip_vec - target_vec
         return np.concatenate([
+            np.cos(theta),
+            np.sin(theta),
+            self.sim.data.qpos.flat[2:],
+            self.sim.data.qvel.flat[:2],
+            self.dist_vec,
             self.muscle_fatigues
         ])
 
