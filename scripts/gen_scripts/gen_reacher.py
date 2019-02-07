@@ -2,6 +2,44 @@ import utils
 from mjcf import elements as e
 
 
+def get_side(fromto, name):
+    side_color = [0.3, 0.1, 0.3, 1]
+    side = e.Geom(
+        conaffinity="0",
+        fromto=fromto,
+        name=name,
+        rgba=side_color,
+        size=0.2,
+        type="capsule",
+    )
+    return side
+
+
+def get_sides():
+    # Half Side Length
+    hsl = 3
+    side_height = 0.1
+
+    sideS = get_side(
+        fromto=[-hsl, -hsl, side_height, hsl, -hsl, side_height],
+        name="sideS",
+    )
+    sideE = get_side(
+        fromto=[hsl, -hsl, side_height, hsl, hsl, side_height],
+        name="sideE",
+    )
+    sideN = get_side(
+        fromto=[-hsl, hsl, side_height, hsl, hsl, side_height],
+        name="sideN",
+    )
+    sideW = get_side(
+        fromto=[-hsl, -hsl, side_height, -hsl, hsl, side_height],
+        name="sideW",
+    )
+
+    return sideS, sideE, sideN, sideW
+
+
 def main():
 
     mujoco = e.Mujoco(
@@ -11,217 +49,231 @@ def main():
         angle="radian",
         inertiafromgeom="true",
     )
-    default = e.Default(
-    )
+    default = e.Default()
     option = e.Option(
         gravity="0 0 -9.81",
         integrator="RK4",
         timestep="0.01",
     )
-    worldbody = e.Worldbody(
-    )
-    actuator = e.Actuator(
-    )
+    worldbody = e.Worldbody()
+    actuator = e.Actuator()
+    asset = e.Asset()
     mujoco.add_children([
         compiler,
         default,
         option,
         worldbody,
         actuator,
+        asset
     ])
-    joint = e.Joint(
+
+    # Standard assets
+    utils.populated_ma_asset(asset)
+
+    # Standard floor and lighting
+    utils.populate_ma_worldbody(worldbody)
+
+    default_joint = e.Joint(
         armature="1",
         damping="1",
         limited="true",
     )
-    geom = e.Geom(
+
+    default_geom = e.Geom(
         contype="0",
         friction="1 0.1 0.1",
         rgba="0.7 0.7 0 1",
     )
     default.add_children([
-        joint,
-        geom,
+        default_joint,
+        default_geom,
     ])
-    ground = e.Geom(
-        conaffinity="0",
-        contype="0",
-        name="ground",
-        pos="0 0 0",
-        rgba="0.9 0.9 0.9 1",
-        size="1 1 10",
-        type="plane",
+
+    sideS, sideE, sideN, sideW = get_sides()
+
+    shoulder_body = e.Body(
+        name="shoulder_body",
+        pos=[0, 0, 0]
     )
-    sideS = e.Geom(
-        conaffinity="0",
-        fromto="-.3 -.3 .01 .3 -.3 .01",
-        name="sideS",
-        rgba="0.9 0.4 0.6 1",
-        size=".02",
-        type="capsule",
+
+    target_body = e.Body(
+        name="target_body",
+        pos="1 -1 .1",
     )
-    sideE = e.Geom(
-        conaffinity="0",
-        fromto=" .3 -.3 .01 .3  .3 .01",
-        name="sideE",
-        rgba="0.9 0.4 0.6 1",
-        size=".02",
-        type="capsule",
-    )
-    sideN = e.Geom(
-        conaffinity="0",
-        fromto="-.3  .3 .01 .3  .3 .01",
-        name="sideN",
-        rgba="0.9 0.4 0.6 1",
-        size=".02",
-        type="capsule",
-    )
-    sideW = e.Geom(
-        conaffinity="0",
-        fromto="-.3 -.3 .01 -.3 .3 .01",
-        name="sideW",
-        rgba="0.9 0.4 0.6 1",
-        size=".02",
-        type="capsule",
-    )
-    root = e.Geom(
-        conaffinity="0",
-        contype="0",
-        fromto="0 0 0 0 0 0.02",
-        name="root",
-        rgba="0.9 0.4 0.6 1",
-        size=".011",
-        type="cylinder",
-    )
-    body0 = e.Body(
-        name="body0",
-        pos="0 0 .01",
-    )
-    target = e.Body(
-        name="target",
-        pos=".1 -.1 .01",
-    )
+
     worldbody.add_children([
-        ground,
         sideS,
         sideE,
         sideN,
         sideW,
-        root,
-        body0,
-        target,
+        shoulder_body,
+        target_body,
     ])
-    motor = e.Motor(
-        ctrllimited="true",
-        ctrlrange="-1.0 1.0",
-        gear="200.0",
-        joint="joint0",
+
+    # ARM
+
+    # Shoulder (central pole)
+    pole_radius = 0.1
+    pole_height = 0.2
+    shoulder_geom = e.Geom(
+        conaffinity="0",
+        contype="0",
+        fromto=[0, 0, 0, 0, 0, pole_height],
+        name="shoulder_geom",
+        rgba="0.9 0.4 0.6 1",
+        size=pole_radius,
+        type="cylinder",
     )
-    motor_1 = e.Motor(
-        ctrllimited="true",
-        ctrlrange="-1.0 1.0",
-        gear="200.0",
-        joint="joint1",
+
+    upper_arm_radius = 0.1
+    left_flex_shoulder_insertion = e.Site(
+        name="left_flex_shoulder_insertion",
+        pos=[0.0, pole_radius, pole_height / 2],
+        size=upper_arm_radius / 2
     )
-    actuator.add_children([
-        motor,
-        motor_1,
+    right_flex_shoulder_insertion = e.Site(
+        name="right_flex_shoulder_insertion",
+        pos=[0.0, -pole_radius, pole_height / 2],
+        size=upper_arm_radius / 2
+    )
+
+    upper_arm_body = e.Body(
+        name="upper_arm_body",
+        pos="0 0 .1",
+    )
+
+    shoulder_body.add_children([
+        shoulder_geom,
+        left_flex_shoulder_insertion,
+        right_flex_shoulder_insertion,
+        upper_arm_body
     ])
-    link0 = e.Geom(
-        fromto="0 0 0 0.1 0 0",
-        name="link0",
+
+    upper_arm_geom = e.Geom(
+        fromto="0 0 0 1 0 0",
+        name="upper_arm_geom",
         rgba="0.0 0.4 0.6 1",
-        size=".01",
+        size=".1",
         type="capsule",
     )
-    joint0 = e.Joint(
+
+    shoulder_joint = e.Joint(
         axis="0 0 1",
         limited="false",
-        name="joint0",
+        name="shoulder_joint",
         pos="0 0 0",
         type="hinge",
     )
-    body1 = e.Body(
-        name="body1",
+
+    lower_arm = e.Body(
+        name="lower_arm",
         pos="0.1 0 0",
     )
-    body0.add_children([
-        link0,
-        joint0,
-        body1,
+
+    upper_arm_body.add_children([
+        upper_arm_geom,
+        shoulder_joint,
+        lower_arm,
     ])
-    target_x = e.Joint(
+
+    elbow_joint = e.Joint(
+        axis="0 0 1",
+        limited="true",
+        name="elbow_joint",
+        pos="0 0 0",
+        range="-3.0 3.0",
+        type="hinge",
+    )
+    lower_arm_geom = e.Geom(
+        fromto="0 0 0 1 0 0",
+        name="lower_arm_geom",
+        rgba="0.0 0.4 0.6 1",
+        size=".1",
+        type="capsule",
+    )
+    fingertip_body = e.Body(
+        name="fingertip_body",
+        pos="0.11 0 0",
+    )
+
+    lower_arm.add_children([
+        elbow_joint,
+        lower_arm_geom,
+        fingertip_body,
+    ])
+
+    fingertip_geom = e.Geom(
+        contype="0",
+        name="fingertip_geom",
+        pos="0 0 0",
+        rgba="0.0 0.8 0.6 1",
+        size=".1",
+        type="sphere",
+    )
+
+    fingertip_body.add_children([
+        fingertip_geom,
+    ])
+
+    # Target Puck / Ball
+
+    # How is the ball/puck allowed to move?
+    target_joint_x = e.Joint(
         armature="0",
         axis="1 0 0",
         damping="0",
         limited="true",
-        name="target_x",
+        name="target_joint_x",
         pos="0 0 0",
         range="-.27 .27",
         ref=".1",
         stiffness="0",
         type="slide",
     )
-    target_y = e.Joint(
+    target_joint_y = e.Joint(
         armature="0",
         axis="0 1 0",
         damping="0",
         limited="true",
-        name="target_y",
+        name="target_joint_y",
         pos="0 0 0",
         range="-.27 .27",
         ref="-.1",
         stiffness="0",
         type="slide",
     )
-    target_1 = e.Geom(
+    target_geom = e.Geom(
         conaffinity="0",
         contype="0",
-        name="target",
+        name="target_geom",
         pos="0 0 0",
         rgba="0.9 0.2 0.2 1",
-        size=".009",
+        size=".09",
         type="sphere",
     )
-    target.add_children([
-        target_x,
-        target_y,
-        target_1,
+    target_body.add_children([
+        target_joint_x,
+        target_joint_y,
+        target_geom,
     ])
-    joint1 = e.Joint(
-        axis="0 0 1",
-        limited="true",
-        name="joint1",
-        pos="0 0 0",
-        range="-3.0 3.0",
-        type="hinge",
+
+    # Actuators
+
+    motor = e.Motor(
+        ctrllimited="true",
+        ctrlrange="-1.0 1.0",
+        gear="200.0",
+        joint="shoulder_joint",
     )
-    link1 = e.Geom(
-        fromto="0 0 0 0.1 0 0",
-        name="link1",
-        rgba="0.0 0.4 0.6 1",
-        size=".01",
-        type="capsule",
+    motor_1 = e.Motor(
+        ctrllimited="true",
+        ctrlrange="-1.0 1.0",
+        gear="200.0",
+        joint="elbow_joint",
     )
-    fingertip = e.Body(
-        name="fingertip",
-        pos="0.11 0 0",
-    )
-    body1.add_children([
-        joint1,
-        link1,
-        fingertip,
-    ])
-    fingertip_1 = e.Geom(
-        contype="0",
-        name="fingertip",
-        pos="0 0 0",
-        rgba="0.0 0.8 0.6 1",
-        size=".01",
-        type="sphere",
-    )
-    fingertip.add_children([
-        fingertip_1,
+    actuator.add_children([
+        motor,
+        motor_1,
     ])
 
     model_xml = mujoco.xml()
