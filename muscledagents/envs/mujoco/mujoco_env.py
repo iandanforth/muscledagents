@@ -15,7 +15,8 @@ DEFAULT_SIZE = 500
 
 
 class MujocoEnv(gym.Env):
-    """Superclass for all MuJoCo environments.
+    """
+    Superclass for all MuJoCo environments.
     """
 
     def __init__(self, model_path, frame_skip):
@@ -47,7 +48,6 @@ class MujocoEnv(gym.Env):
         low = np.zeros(1)
         high = np.ones(1)
         self.action_space = spaces.Box(low=low, high=high)
-        print(self.action_space.shape)
         self.observation_space = spaces.Box(low=low, high=high)
 
         # There may not be an actuated model loaded

@@ -1,6 +1,33 @@
+import math
 import numpy as np
-from mujoco_py import MujocoException
 from .base_muscled_env import BaseMuscledEnv
+
+
+def unit_vector(vector):
+    """
+    Returns the unit vector of the vector.
+    https://stackoverflow.com/a/13849249/1775741
+    """
+    return vector / np.linalg.norm(vector)
+
+
+def angle_between(v1, v2):
+    """
+    Returns the angle in degrees between vectors 'v1' and 'v2'::
+
+            >>> angle_between((1, 0, 0), (0, 1, 0))
+            1.5707963267948966
+            >>> angle_between((1, 0, 0), (1, 0, 0))
+            0.0
+            >>> angle_between((1, 0, 0), (-1, 0, 0))
+            3.141592653589793
+
+    https://stackoverflow.com/a/13849249/1775741
+    """
+    v1_u = unit_vector(v1)
+    v2_u = unit_vector(v2)
+    rad = np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
+    return rad
 
 
 class MuscledReacherEnv(BaseMuscledEnv):
@@ -66,6 +93,37 @@ class MuscledReacherEnv(BaseMuscledEnv):
         ])
 
     def reset_model(self):
+        # Randomize arm joint angles and target position.
+        shoulderRange = 100 * (math.pi / 180)  # +/-
+        elbowRange = 172 * (math.pi / 180)  # +/-
+        targetRange = 2  # Full circle working area radius
+
+        # Restrict target placement area to arc of shoulder and len of arm
+        unitV = np.array([1, 0])
+        while True:
+            self.goal = self.np_random.uniform(low=-targetRange, high=targetRange, size=2)
+            angle = abs(angle_between(unitV, self.goal))
+            mag = np.linalg.norm(self.goal)
+            if (mag < 2) and (angle < shoulderRange):
+                break
+
+        # Qpos
+        # Q - Refers to the generalized coordinate
+        #     http://www.mujoco.org/book/computation.html#General
+        # Pos - position
+        # This corresponds to joints [shoulder, elbow, targetX, targetY]
+        qpos = np.array([
+            self.np_random.uniform(low=-shoulderRange, high=shoulderRange),
+            self.np_random.uniform(low=-elbowRange, high=elbowRange),
+            self.goal[0],
+            self.goal[1],
+        ])
+
+        # Set all velocities to zero when starting over.
+        qvel = np.zeros(self.model.nq)
+        self.set_state(qpos, qvel)
+
+        # Reset our muscles and locally stored fatigue values
         self._reset_muscles(self.muscle_count)
         self._reset_fatigues(self.muscle_count)
         return self._get_obs()

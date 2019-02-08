@@ -21,7 +21,7 @@
 			<site name="right_flex_shoulder_side" pos="0.0 -0.216 0.1" size="0.005"/>
 			<body name="upper_arm_body" pos="0 0 .1">
 				<geom fromto="0 0 0 1.0 0 0" name="upper_arm_geom" rgba="0.0 0.2 0.4 1" size="0.05" type="capsule"/>
-				<joint axis="0 0 1" limited="true" name="shoulder_joint" pos="0 0 0" range="-90 90" type="hinge"/>
+				<joint axis="0 0 1" limited="true" name="shoulder_joint" pos="0 0 0" range="-100 100" type="hinge"/>
 				<site name="left_flex_ua_insertion" pos="0.25 0.05 0.0" size="0.025"/>
 				<site name="right_flex_ua_insertion" pos="0.25 -0.05 0.0" size="0.025"/>
 				<site name="left_curl_ua_insertion" pos="0.5 0.05 0.0" size="0.025"/>
@@ -42,9 +42,9 @@
 				</body>
 			</body>
 		</body>
-		<body name="target_body" pos="1 -1 .1">
-			<joint armature="0" axis="1 0 0" damping="0" limited="true" name="target_joint_x" pos="0 0 0" range="-.27 .27" ref=".1" stiffness="0" type="slide"/>
-			<joint armature="0" axis="0 1 0" damping="0" limited="true" name="target_joint_y" pos="0 0 0" range="-.27 .27" ref="-.1" stiffness="0" type="slide"/>
+		<body name="target_body" pos="0 0 0.1">
+			<joint armature="0" axis="1 0 0" damping="0" limited="false" name="target_joint_x" pos="0 0 0" stiffness="0" type="slide"/>
+			<joint armature="0" axis="0 1 0" damping="0" limited="false" name="target_joint_y" pos="0 0 0" stiffness="0" type="slide"/>
 			<geom conaffinity="0" contype="0" name="target_geom" pos="0 0 0" rgba="0.9 0.2 0.2 1" size=".09" type="sphere"/>
 		</body>
 	</worldbody>

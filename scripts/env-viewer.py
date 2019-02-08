@@ -31,6 +31,9 @@ def main():
         if len(action) > 1:
             action[1] = ((math.sin(i / 25) + 1) / 2)
         ob, reward, done, extras = env.step(action)
+        if i % 500 == 0:
+            print("Resetting Env")
+            env.reset()
         env.render()
 
 

@@ -100,7 +100,7 @@ def main():
 
     target_body = e.Body(
         name="target_body",
-        pos="1 -1 .1",
+        pos=[0, 0, .1],
     )
 
     worldbody.add_children([
@@ -178,7 +178,7 @@ def main():
     shoulder_joint = e.Joint(
         axis=[0, 0, 1],
         limited=True,
-        range=[-90, 90],
+        range=[-100, 100],
         name="shoulder_joint",
         pos=[0, 0, 0],
         type="hinge",
@@ -403,11 +403,9 @@ def main():
         armature="0",
         axis="1 0 0",
         damping="0",
-        limited="true",
+        limited=False,
         name="target_joint_x",
         pos="0 0 0",
-        range="-.27 .27",
-        ref=".1",
         stiffness="0",
         type="slide",
     )
@@ -415,11 +413,9 @@ def main():
         armature="0",
         axis="0 1 0",
         damping="0",
-        limited="true",
+        limited=False,
         name="target_joint_y",
         pos="0 0 0",
-        range="-.27 .27",
-        ref="-.1",
         stiffness="0",
         type="slide",
     )
