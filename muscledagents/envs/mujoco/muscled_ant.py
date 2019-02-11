@@ -1,49 +1,15 @@
 import numpy as np
-from gym import utils, spaces
 from mujoco_py import MujocoException
-from . import mujoco_env
-from pymuscle import StandardMuscle as Muscle
+from .base_muscled_env import BaseMuscledEnv
 
 
-class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
+class MuscledAntEnv(BaseMuscledEnv):
+
     def __init__(self):
-
-        # Create the muscles for this ant
-        self.muscle_count = 16
-        self.muscles = self._get_muscles(self.muscle_count)
-        self.muscle_fatigues = np.zeros(self.muscle_count)
-
-        # Initialize parent
-        mujoco_env.MujocoEnv.__init__(self, 'muscled-ant.xml', 4)
-
-        # Overwrite the action space
-        # PyMuscles provide an abstraction over the underlying sim
-        # We want to specify an input to the pymuscles and let them handle
-        # inputs to the simulated actuators.
-        low = np.zeros(self.muscle_count)
-        high = np.ones(self.muscle_count)
-        self.action_space = spaces.Box(low=low, high=high)
-
-        utils.EzPickle.__init__(self)
-
-    def _get_muscles(
-        self,
-        muscle_count,
-        max_force=100.0
-    ):
-        """
-        Create N muscles where N is the number of actuators specified in the
-        model file.
-
-        Note: max_force should be kept in line with the gainprm on actuators
-        in the muscled-ant.xml
-        """
-        muscles = []
-        for i in range(muscle_count):
-            muscle = Muscle(max_force)
-            muscles.append(muscle)
-
-        return muscles
+        super().__init__(
+            muscle_count=16,
+            xml_filename='muscled-ant.xml'
+        )
 
     def step(self, a):
         xposbefore = self.get_body_com("torso")[0]
@@ -120,7 +86,8 @@ class MuscledAntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         qpos = self.init_qpos + self.np_random.uniform(size=self.model.nq, low=-.1, high=.1)
         qvel = self.init_qvel + self.np_random.randn(self.model.nv) * .1
         self.set_state(qpos, qvel)
-        self.muscle_fatigues = np.zeros(self.muscle_count)
+        self._reset_muscles(self.muscle_count)
+        self._reset_fatigues(self.muscle_count)
         return self._get_obs()
 
     def viewer_setup(self):

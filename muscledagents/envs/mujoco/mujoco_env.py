@@ -5,7 +5,6 @@ from gym.utils import seeding
 import numpy as np
 from os import path
 import gym
-import six
 
 try:
     import mujoco_py
@@ -16,7 +15,8 @@ DEFAULT_SIZE = 500
 
 
 class MujocoEnv(gym.Env):
-    """Superclass for all MuJoCo environments.
+    """
+    Superclass for all MuJoCo environments.
     """
 
     def __init__(self, model_path, frame_skip):
@@ -38,11 +38,25 @@ class MujocoEnv(gym.Env):
             'video.frames_per_second': int(np.round(1.0 / self.dt))
         }
 
-        self.init_qpos = self.sim.data.qpos.ravel().copy()
-        self.init_qvel = self.sim.data.qvel.ravel().copy()
         observation, _reward, done, _info = self.step(np.zeros(self.model.nu))
         assert not done
         self.obs_dim = observation.size
+
+        self.seed()
+
+        # Dummy action and observation spaces
+        low = np.zeros(1)
+        high = np.ones(1)
+        self.action_space = spaces.Box(low=low, high=high)
+        self.observation_space = spaces.Box(low=low, high=high)
+
+        # There may not be an actuated model loaded
+        if self.sim.data.qpos is None:
+            print("WARNING: No model detected.")
+            return
+
+        self.init_qpos = self.sim.data.qpos.ravel().copy()
+        self.init_qvel = self.sim.data.qvel.ravel().copy()
 
         bounds = self.model.actuator_ctrlrange.copy()
         low = bounds[:, 0]
@@ -52,8 +66,6 @@ class MujocoEnv(gym.Env):
         high = np.inf*np.ones(self.obs_dim)
         low = -high
         self.observation_space = spaces.Box(low, high)
-
-        self.seed()
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
