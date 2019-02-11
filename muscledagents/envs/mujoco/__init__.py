@@ -20,6 +20,6 @@ register(
 register(
     id='MuscledReacher-v0',
     entry_point='muscledagents.envs.mujoco:MuscledReacherEnv',
-    # max_episode_steps=50,  # TODO: Set this to 50 to match orig
-    reward_threshold=-3.75
+    max_episode_steps=1000,  # Task is reach & hold.
+    reward_threshold=-150    # Baseline from PPO
 )

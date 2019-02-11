@@ -31,6 +31,23 @@ def angle_between(v1, v2):
 
 
 class MuscledReacherEnv(BaseMuscledEnv):
+    """
+    This environment makes several changes to the OpenAI Gym Env 'Reacher-v2'
+    on which it is based.
+
+    Major Changes:
+        - Actuation is through tendon-actuator pairs
+        - There is a fatigue model applied to each model (via PyMuscle)
+        - The models have been scaled up for greater consistency among
+          MuJoCo models.
+        - The max number of steps per trial has been increased to 1000.
+          This changes the task to a reach & hold-position task.
+          The original task could be 'solved' with the hand still in motion.
+        - The hand-crafted energy penalty has been removed.
+        - The reward criteria based on the above changes is now -150.
+        - As with all MuscledX envs the observation space includes the
+          current fatigue levels of the muscles.
+    """
 
     def __init__(self):
 
@@ -79,15 +96,17 @@ class MuscledReacherEnv(BaseMuscledEnv):
         return ob, reward, done, info
 
     def _get_obs(self):
+        # Get the angles of the first two joints
         theta = self.sim.data.qpos.flat[:2]
         fingertip_vec = self.get_body_com("fingertip_body")
         target_vec = self.get_body_com("target_body")
+        # Get the distance to the target
         self.dist_vec = fingertip_vec - target_vec
         return np.concatenate([
-            np.cos(theta),
-            np.sin(theta),
-            self.sim.data.qpos.flat[2:],
-            self.sim.data.qvel.flat[:2],
+            np.cos(theta),  # Why are we taking cos here?
+            np.sin(theta),  # Why are we taking sin here?
+            self.sim.data.qpos.flat[2:],  # Location of the target
+            self.sim.data.qvel.flat[:2],  # Angular rotation of arm joints
             self.dist_vec,
             self.muscle_fatigues
         ])
