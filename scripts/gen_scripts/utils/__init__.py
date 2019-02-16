@@ -3,6 +3,44 @@ from .colors import rgb_to_decimal
 from mjcf import elements as e
 
 
+def add_axes(worldbody, axis_length=1.2, axis_radius=0.05):
+    """
+    Adds a set of axis at the world origin. Helpful for debugging.
+    """
+    x_axis = e.Geom(
+        conaffinity=0,
+        name="x_axis",
+        pos=[0, 0, 0],
+        rgba=[1, 0, 0, 0.5],
+        type="cylinder",
+        size=axis_radius,
+        fromto=[0, 0, 0, axis_length, 0, 0]
+    )
+    y_axis = e.Geom(
+        conaffinity=0,
+        name="y_axis",
+        pos=[0, 0, 0],
+        rgba=[0, 1, 0, 0.5],
+        type="cylinder",
+        size=axis_radius,
+        fromto=[0, 0, 0, 0, axis_length, 0]
+    )
+    z_axis = e.Geom(
+        conaffinity=0,
+        name="z_axis",
+        pos=[0, 0, 0],
+        rgba=[0, 0, 1, 0.5],
+        type="cylinder",
+        size=axis_radius,
+        fromto=[0, 0, 0, 0, 0, axis_length]
+    )
+    worldbody.add_children([
+        x_axis,
+        y_axis,
+        z_axis
+    ])
+
+
 def populated_ma_asset(asset):
     """
     Adds standard MuscledAgent environment assets into the provided

@@ -1,4 +1,5 @@
 import utils
+from itertools import chain
 from mjcf import elements as e
 
 
@@ -6,7 +7,7 @@ def get_ant(name="ant1", location=[0, 0, 0.75]):
 
     if name != "":
         name = "_{}".format(name)
-    
+
     torso = e.Body(
         name="torso"+name,
         pos=location,
@@ -36,32 +37,45 @@ def get_ant(name="ant1", location=[0, 0, 0.75]):
         type="free"
     )
     front_right_leg, fr_tendons, fr_actuators = get_leg(
-        "front_right_leg"+name
+        "front_right_leg"+name,
+        hip_angle=-45
     )
     front_left_leg, fl_tendons, fl_actuators = get_leg(
         "front_left_leg"+name,
-        hip_angle=90,
-    )
-    back_left_leg, bl_tendons, bl_actuators = get_leg(
-        "back_left_leg"+name,
-        hip_angle=180,
+        hip_angle=45,
     )
     back_right_leg, br_tendons, br_actuators = get_leg(
         "back_right_leg"+name,
-        hip_angle=270,
+        hip_angle=-135,
     )
+    back_left_leg, bl_tendons, bl_actuators = get_leg(
+        "back_left_leg"+name,
+        hip_angle=135,
+    )
+
     torso.add_children([
         camera,
         torso_geom,
         joint,
         front_right_leg,
         front_left_leg,
+        back_right_leg,
         back_left_leg,
-        back_right_leg
     ])
 
-    tendons = fr_tendons + fl_tendons + bl_tendons + br_tendons
-    actuators = fr_actuators + fl_actuators + bl_actuators + br_actuators
+    # chain() is used for easy commenting out
+    tendons = list(chain(
+        fr_tendons,
+        fl_tendons,
+        br_tendons,
+        bl_tendons,
+    ))
+    actuators = list(chain(
+        fr_actuators,
+        fl_actuators,
+        br_actuators,
+        bl_actuators,
+    ))
 
     return torso, tendons, actuators
 
@@ -395,6 +409,9 @@ def main():
 
     # Standard floor and lighting
     utils.populate_ma_worldbody(worldbody)
+
+    # Add axes. Useful for debugging
+    # utils.add_axes(worldbody)
 
     ant_bodies = []
     ant_tendons = []
