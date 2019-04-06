@@ -13,7 +13,8 @@ class BaseMuscledEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         self._reset_fatigues(self.muscle_count)
 
         # Initialize first parent
-        mujoco_env.MujocoEnv.__init__(self, xml_filename, 4)
+        frame_skip = 4
+        mujoco_env.MujocoEnv.__init__(self, xml_filename, frame_skip)
 
         # Overwrite the action space
         # PyMuscles provide an abstraction over the underlying sim

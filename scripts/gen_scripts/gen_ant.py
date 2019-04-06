@@ -1,4 +1,5 @@
 import utils
+from utils.colors import rgba_to_decimal
 from itertools import chain
 from mjcf import elements as e
 
@@ -16,8 +17,8 @@ def get_ant(name="ant1", location=[0, 0, 0.75]):
     # Torso
     camera = e.Camera(
         name="track"+name,
-        mode="trackcom",
-        pos=[0, -3, 0.3],
+        mode="track",
+        pos=[0, -6, 0.6],
         xyaxes=[1, 0, 0, 0, 0, 1]
     )
     torso_geom = e.Geom(
@@ -179,6 +180,7 @@ def get_leg(
     knee_top_side = e.Site(
         name="knee_top_side_"+name,
         pos=[thigh_length, 0.0, leg_radius * 2],
+        rgba=[0, 0, 0, 0],
         size=leg_radius / 8
     )
     shin_body = e.Body(
@@ -303,7 +305,7 @@ def get_leg(
     # Actuators
     # TODO: Replace with Muscles once 2.0 is released
     actuators = []
-    act_gain = 100  # Max 100N output
+    act_gain = 50  # Max 100N output
     act_ctrl_range = [-1.0, 0.0]
     ctrllimited = "true"
     quad_act = e.General(

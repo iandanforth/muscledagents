@@ -6,6 +6,12 @@ from .inferno import inferno # NoQA
 from .magma import magma # NoQA
 
 
+def rgba_to_decimal(r, g, b, a):
+    dec = rgb_to_decimal(r, g, b)
+    dec.append(a / 255)
+    return dec
+
+
 def rgb_to_decimal(r, g, b):
     assert (np.array([r, g, b]) <= 255).all()
     dec = [r / 255, g / 255, b / 255]

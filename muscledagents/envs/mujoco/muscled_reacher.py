@@ -67,7 +67,7 @@ class MuscledReacherEnv(BaseMuscledEnv):
         outputs = []
         fatigues = []
         for i, muscle in enumerate(self.muscles):
-            output = muscle.step(a[i], 0.002 * self.frame_skip)
+            output = muscle.step(a[i], self.dt)
             fatigues.append(muscle.get_peripheral_fatigue())
             output = -1 * output
             outputs.append(output)
@@ -91,7 +91,10 @@ class MuscledReacherEnv(BaseMuscledEnv):
         done = False
 
         # Info
-        info = dict(reward=reward)
+        info = dict(
+            reward=reward,
+            muscle_fatigues=self.muscle_fatigues
+        )
 
         return ob, reward, done, info
 

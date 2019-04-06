@@ -14,11 +14,12 @@ class MuscledAntEnv(BaseMuscledEnv):
         xposbefore = self.get_body_com("torso")[0]
 
         # Step the muscle sims
+        # Where dt is self.frame_skip * model.opt.timestep
         # Collect output and fatigue levels
         outputs = []
         fatigues = []
         for i, muscle in enumerate(self.muscles):
-            output = muscle.step(a[i], 0.002 * self.frame_skip)
+            output = muscle.step(a[i], self.dt)
             fatigues.append(muscle.get_peripheral_fatigue())
             outputs.append(output)
         self.muscle_fatigues = np.array(fatigues)
@@ -45,7 +46,12 @@ class MuscledAntEnv(BaseMuscledEnv):
         # Get environment observations
         ob = self._get_obs()
 
-        return ob, reward, done, dict(reward_forward=forward_reward)
+        info = dict(
+            reward_forward=forward_reward,
+            muscle_fatigues=self.muscle_fatigues
+        )
+
+        return ob, reward, done, info
 
     def _get_obs(self):
         return np.concatenate([
@@ -67,11 +73,11 @@ class MuscledAntEnv(BaseMuscledEnv):
         self._reset_fatigues(self.muscle_count)
         return self._get_obs()
 
-    def viewer_setup(self):
-        self.viewer.cam.distance = self.model.stat.extent * 0.5
+    # def viewer_setup(self):
+    #     self.viewer.cam.distance = self.model.stat.extent * 0.5
 
     # def viewer_setup(self):
-    #     self.viewer.cam.trackbodyid = 2
-    #     self.viewer.cam.distance = self.model.stat.extent * 0.75
+    #     # self.viewer.cam.trackbodyid = 2
+    #     # self.viewer.cam.distance = self.model.stat.extent * 1.75
     #     self.viewer.cam.lookat[2] += .8
     #     self.viewer.cam.elevation = -20
